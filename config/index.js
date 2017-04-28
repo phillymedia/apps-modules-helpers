@@ -4,10 +4,19 @@
 */
 
 // grab environment variables
-const env = process.env.NODE_ENV || process.env.npm_config_environment || process.env.npm_package_config_environment || "production";
-// nab from parent app or command line
-// (we use a separate debugmode process so as not to turn on the debug mode in OTHER modules)
-const debug = process.env.DEBUGMODE || (process.env.npm_config_debugmode === "true");
+// grab environment
+const env = process.env.NODE_ENV
+	// npm
+	|| process.env.npm_config_environment
+	|| process.env.npm_package_config_environment
+	// default
+	|| "production";
+// grab debug mode
+const debug = process.env.DEBUG
+	// (we use a separate debugmode process so as not to turn on the debug mode in OTHER modules)
+	|| process.env.DEBUGMODE
+	// npm
+	|| (process.env.npm_config_debugmode === "true");
 // import config based on environment
 // const Main = require(`./${env}`);
 const Main = {
