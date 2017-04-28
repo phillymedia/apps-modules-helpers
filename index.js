@@ -5,7 +5,7 @@
  */
 
 // module alias
-require("module-alias/register");
+require("./aliases");
 
 // MOST DEPENDENCIES
 // =============================================================================
