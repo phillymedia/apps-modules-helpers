@@ -4,9 +4,6 @@
  * Hopefully reusable class of functions.
  */
 
-// module alias
-require("./aliases");
-
 // MOST DEPENDENCIES
 // =============================================================================
 const errors = require("./controllers/errors");
