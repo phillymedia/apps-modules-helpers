@@ -24,7 +24,7 @@ const Main = {
 	env,
 	debug,
 };
-console.log("What is happening here???:", debug, Main.debug);
+console.log("debug", typeof Main.debug, Main.debug);
 // print information about environment.
 if (Main.debug === true) {
 	console.log("Running helpers app in", Main.env, "mode. Debug is on.");
