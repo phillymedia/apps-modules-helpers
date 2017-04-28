@@ -17,6 +17,9 @@ const debug = process.env.DEBUG
 	|| process.env.DEBUGMODE
 	// npm
 	|| (process.env.npm_config_debugmode === "true");
+
+console.log("Environment", process.env.NODE_ENV, process.env.npm_config_environment, process.env.npm_package_config_environment);
+console.log("Debug", process.env.DEBUG, process.env.DEBUGMODE, process.env.npm_config_debugmode);
 // import config based on environment
 // const Main = require(`./${env}`);
 const Main = {
