@@ -9,7 +9,7 @@ const conf = require("@/config");
 
 // MOST DEPENDENCIES
 // =============================================================================
-const transforms = require("./transforms");
+const transforms = require("@/controllers/transforms");
 // third-party libraries
 const mongoose = require("mongoose");
 

@@ -9,9 +9,8 @@
 // config
 const conf = require("@/config");
 // load other helpers
-const path = conf.paths.helpers;
-const errors = require(`${path}errors`);
-const transforms = require(`${path}transforms`);
+const errors = require("@/controllers/errors");
+const transforms = require("@/controllers/transforms");
 // third-party libraries
 const _ = require("lodash");
 
@@ -51,7 +50,7 @@ function Main() {
 * @param {Object} res 				The response.
 * @return {Function} next		 	Next!
 */
-function _sendUnauthorized(req, res) {
+function sendUnauthorized(req, res) {
 	res.setHeader("Content-Type", "application/json");
 	res.status(403);
 	res.send("Forbidden");
@@ -67,7 +66,7 @@ function _sendUnauthorized(req, res) {
 * @param {Object} res 				The response.
 * @return {Function} next		 	Next!
 */
-function _sendFailure(err, req, res, next) {
+function sendFailure(err, req, res, next) {
 	// save the server response
 	const savedRes = res;
 	// ensure properly formatted error
@@ -105,7 +104,7 @@ function _sendFailure(err, req, res, next) {
 * @param {Object} res 				The response.
 * @return {Function} next		 	Next!
 */
-function _prepSuccess(req, res, next) {
+function prepSuccess(req, res, next) {
 	const sentData = res.sendData;
 	// set up the data
 	res.sendData = { success: true, data: sentData };
@@ -120,14 +119,14 @@ function _prepSuccess(req, res, next) {
 * @param {Object} res 				The response.
 * @param {Object} sendData 			The data.
 */
-function _sendSuccess(req, res, next) {
+function sendSuccess(req, res, next) {
 	if (_debug) {
 		console.log("Success!", "sent data:", res.sendData);
 	}
 	const input = transforms.safeStringify(res.sendData);
 	if (_.isError(input)) {
 		console.error("Could not send success!", input.stack);
-		return _sendFailure(input, req, res, next);
+		return sendFailure(input, req, res, next);
 	}
 	// send success
 	res.setHeader("Content-Type", "application/json");
@@ -146,8 +145,8 @@ function _sendSuccess(req, res, next) {
 * @param {Object} req 				The original request.
 * @param {Object} res 				The response.
 */
-function _handleSuccess(req, res, next) {
-	return _sendSuccess(req, res, next);
+function handleSuccess(req, res, next) {
+	return sendSuccess(req, res, next);
 }
 
 /**
@@ -157,8 +156,8 @@ function _handleSuccess(req, res, next) {
 * @param {Object} req 				The original request.
 * @param {Object} res 				The response.
 */
-function _handleFailure(err, req, res, next) {
-	return _sendFailure(err, req, res, next);
+function handleFailure(err, req, res, next) {
+	return sendFailure(err, req, res, next);
 }
 
 /**
@@ -168,7 +167,7 @@ function _handleFailure(err, req, res, next) {
 * @param {Object} req 				The original request.
 * @param {Object} res 				The response.
 */
-function _handleRobots(req, res) {
+function handleRobots(req, res) {
 	res.type("text/plain");
 	res.send("User-agent: *\nDisallow: /");
 	res.end();
@@ -184,28 +183,28 @@ function _handleRobots(req, res) {
 // SEND RESPONSES
 // =============================================================================
 // the user is not authorized!
-Main.prototype.sendUnauthorized = _sendUnauthorized;
+Main.prototype.sendUnauthorized = sendUnauthorized;
 
 // the operation failed in some way, send a response
-Main.prototype.sendFailure = _sendFailure;
+Main.prototype.sendFailure = sendFailure;
 
 // the operation succeeded, prepare a successful response
-Main.prototype.prepSuccess = _prepSuccess;
+Main.prototype.prepSuccess = prepSuccess;
 
 // the operation succeeded, send a response
-Main.prototype.sendSuccess = _sendSuccess;
+Main.prototype.sendSuccess = sendSuccess;
 
 
 // ROUTE FUNCTIONS
 // =============================================================================
 // disallow search engine crawlers
-Main.prototype.handleRobots = _handleRobots;
+Main.prototype.handleRobots = handleRobots;
 
 // middleware for sending success messages
-Main.prototype.handleSuccess = _handleSuccess;
+Main.prototype.handleSuccess = handleSuccess;
 
 // middleware for sending failure messages
-Main.prototype.handleFailure = _handleFailure;
+Main.prototype.handleFailure = handleFailure;
 
 
 /*

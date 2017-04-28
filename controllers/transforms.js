@@ -51,22 +51,22 @@ var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
 /**
 * Stringify with JSON safely.
 *
-* _safeStringify
+* @method safeStringify
 * @param   {String} input						The object to stringify.
 * @return  {Object} input/{Object} error		Parsed string, or error.
 **/
-function _safeStringify(input) {
+function safeStringify(input) {
 	return _.attempt(JSON.stringify.bind(null, input));
 }
 
 /**
 * Parse with JSON safely.
 *
-* _safeParse
+* @method safeParse
 * @param   {Object} input						The string to parse.
 * @return  {String} input/{Object} error		Parsed object, or error.
 **/
-function _safeParse(input) {
+function safeParse(input) {
 	if (_.isObject(input)) {
 		return input;
 	}
@@ -76,22 +76,22 @@ function _safeParse(input) {
 /**
 * Stop the timer.
 *
-* _htmlToText
+* @method htmlToText
 * @param   {String} input						The string to strip.
 * @return  {String} input						Formatted string.
 **/
-function _htmlToText(input) {
+function htmlToText(input) {
 	return striptags(htmlEntities.decode(input), [], " ").replace(/\s{2,}/g, " ");
 }
 
 /**
 * Delete trailing slash from the end of a string.
 *
-* _stripTrailingSlash
+* @method stripTrailingSlash
 * @param   {String} input						The string to strip.
 * @return  {String} input						The stripped string.
 **/
-function _stripTrailingSlash(input) {
+function stripTrailingSlash(input) {
 	if (!_.isString(input)) {
 		return input;
 	}
@@ -108,13 +108,13 @@ function _stripTrailingSlash(input) {
 // TEXT TRANSFORMS
 // =============================================================================
 // stringify
-Main.prototype.safeStringify = _safeStringify;
+Main.prototype.safeStringify = safeStringify;
 // parse
-Main.prototype.safeParse = _safeParse;
+Main.prototype.safeParse = safeParse;
 // strip html
-Main.prototype.htmlToText = _htmlToText;
+Main.prototype.htmlToText = htmlToText;
 // delete trailing slash from the end of a string
-Main.prototype.stripTrailingSlash = _stripTrailingSlash;
+Main.prototype.stripTrailingSlash = stripTrailingSlash;
 
 
 /*

@@ -47,21 +47,21 @@ var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
 /**
 * Start the timer.
 *
-* _start
+* @method start
 * @return {Function} 				Start the timer.
 **/
-function _start() {
+function start() {
 	return process.hrtime();
 }
 
 /**
 * Stop the timer.
 *
-* _stop
+* @method stop
 * @param {Date} start				Timestamp.
 * @return {String} description		Description of the time.
 **/
-function _stop(start, description) {
+function stop(start, description) {
 	const elapsed = process.hrtime(start); // = [seconds,nanoseconds]
 	description += " execution time: ";
 	console.info(`${description}%ds %dms`, elapsed[0], Math.round(elapsed[1] / 1000000));
@@ -70,31 +70,31 @@ function _stop(start, description) {
 /**
 * Now.
 *
-* _now
+* @method now
 * @return {Date}		Description of the time.
 **/
-function _now() {
+function now() {
 	// date
 	return new Date();
 }
 
 /**
-* Adds or substracts minutes from _now.
+* Adds or substracts minutes from now().
 *
-* _minutesFromNow
+* @method minutesFromNow
 * @param {Number} minutes			Minutes from now.
 * @param {Boolean} reversed			Positive or negative.
 * @return {Date}					Now, adjusted.
 **/
-function _minutesFromNow(minutes, reversed) {
+function minutesFromNow(minutes, reversed) {
 	// date
-	const now = _now();
+	const currentTime = now();
 	// set minutes
-	minutes = now.getMinutes() + Number((reversed ? "-" : "") + minutes);
+	minutes = currentTime.getMinutes() + Number((reversed ? "-" : "") + minutes);
 	// adjust date
-	now.setMinutes(minutes);
+	currentTime.setMinutes(minutes);
 	// return date
-	return now;
+	return currentTime;
 }
 
 
@@ -107,11 +107,11 @@ function _minutesFromNow(minutes, reversed) {
 // TIMERS
 // =============================================================================
 // time a given function
-Main.prototype.start = _start;
-Main.prototype.stop = _stop;
+Main.prototype.start = start;
+Main.prototype.stop = stop;
 // manipulate a date
-Main.prototype.now = _now;
-Main.prototype.minutesFromNow = _minutesFromNow;
+Main.prototype.now = now;
+Main.prototype.minutesFromNow = minutesFromNow;
 
 
 /*
