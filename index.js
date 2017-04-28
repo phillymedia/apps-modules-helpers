@@ -1,8 +1,11 @@
 /**
  * PHILLLY HELPERS
- * 
+ *
  * Hopefully reusable class of functions.
  */
+
+// module alias
+require("module-alias/register");
 
 // MOST DEPENDENCIES
 // =============================================================================
@@ -18,7 +21,7 @@ const transforms = require("./controllers/transforms");
 * function Foo(){ // set some variables up }
 */
 
-function Main(){
+function Main() {
 
 	/*
 	* PUBLIC PROPERTIES
