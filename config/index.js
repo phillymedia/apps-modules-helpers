@@ -18,14 +18,13 @@ const debug = process.env.DEBUG
 	// npm
 	|| (process.env.npm_config_debugmode === "true");
 
-console.log("Environment", process.env.NODE_ENV, process.env.npm_config_environment, process.env.npm_package_config_environment);
-console.log("Debug - env", process.env.DEBUG, "Debug - env-mode", process.env.DEBUGMODE, "Debug - package", process.env.npm_config_debugmode, "Debug - final value", debug);
 // import config based on environment
 // const Main = require(`./${env}`);
 const Main = {
 	env,
 	debug,
 };
+console.log("What is happening here???:", debug, Main.debug);
 // print information about environment.
 if (Main.debug) {
 	console.log("Running helpers app in", Main.env, "mode. Debug is on.");
