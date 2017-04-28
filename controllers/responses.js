@@ -6,13 +6,14 @@
 
 // MOST DEPENDENCIES
 // =============================================================================
+const root = "..";
 // config
-const conf = require("@/config");
-// load other helpers
-const errors = require("@/controllers/errors");
-const transforms = require("@/controllers/transforms");
-// third-party libraries
+const conf = require(`${root}/config`);
+// third-party
 const _ = require("lodash");
+// sibling modules
+const errors = require(`${root}/controllers/errors`);
+const transforms = require(`${root}/controllers/transforms`);
 
 // CONFIG -------------------------------
 const _debug = conf.debug; // eslint-disable-line no-unused-vars

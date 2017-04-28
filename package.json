@@ -13,7 +13,6 @@
 	  "html-entities": "*",
 	  "lodash": "*",
 	  "mongoose": "*",
-	  "module-alias": "*",
 	  "striptags": "*"
   },
   "devDependencies": {

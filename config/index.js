@@ -16,7 +16,7 @@ const Main = {
 };
 // print information about environment.
 if (Main.debug) {
-	console.log("Running app in", Main.env, "mode. Debug is on.");
+	console.log("Running helpers app in", Main.env, "mode. Debug is on.");
 }
 // export completed config file
 module.exports = Main;

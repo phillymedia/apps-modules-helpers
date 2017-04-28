@@ -6,10 +6,9 @@
 
 // MOST DEPENDENCIES
 // =============================================================================
+const root = "..";
 // config
-const conf = require("@/config");
-// third-party libraries
-const _ = require("lodash"); // eslint-disable-line no-unused-vars
+const conf = require(`${root}/config`);
 
 // CONFIG -------------------------------
 const _debug = conf.debug; // eslint-disable-line no-unused-vars

@@ -4,14 +4,15 @@
  * Hopefully reusable class of functions.
  */
 
-// config
-const conf = require("@/config");
-
 // MOST DEPENDENCIES
 // =============================================================================
-const transforms = require("@/controllers/transforms");
+const root = "..";
+// config
+const conf = require(`${root}/config`);
 // third-party libraries
 const mongoose = require("mongoose");
+// sibling modules
+const transforms = require(`${root}/controllers/transforms`);
 
 // CONFIG -------------------------------
 const _debug = conf.debug; // eslint-disable-line no-unused-vars

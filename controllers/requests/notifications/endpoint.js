@@ -7,13 +7,10 @@
 // MOST DEPENDENCIES
 // =============================================================================
 // config
-const conf = require("@/config");
+const root = "../../..";
 // sibling modules
-const errors = require("@/controllers/errors");
-// const transforms = require("@/controllers/transforms");
-
-// CONFIG -------------------------------
-const _debug = conf.debug; // eslint-disable-line no-unused-vars
+const errors = require(`${root}/controllers/errors`);
+// const transforms = require(`${root}/controllers/transforms`);
 
 
 /*
