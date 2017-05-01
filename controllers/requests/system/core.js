@@ -1,6 +1,6 @@
 /**
  * PHILLLY HELPERS
- * requests/feed/search
+ * requests/system/core
  * Hopefully reusable class of functions.
  */
 
@@ -20,18 +20,6 @@ const _debug = conf.debug; // eslint-disable-line no-unused-vars
 
 
 /*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
-
-
-/*
 * PRIVATE PROPERTIES
 * var _privateBar;
 */
@@ -39,6 +27,12 @@ function Main() {
 /*
 * PRIVATE METHODS
 * function _privateBar(){ var self = this; return this.foo; }
+*/
+
+/*
+* PUBLIC METHODS
+* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
+* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
 */
 
 /**
@@ -98,21 +92,12 @@ function getInput(req, res, next) {
 	return next(err);
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// ADD INPUT
-// =============================================================================
-// for system
-Main.prototype.getInput = getInput;
-
 
 /*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	getInput,
+};

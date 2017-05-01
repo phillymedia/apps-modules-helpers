@@ -21,19 +21,6 @@ const _debug = conf.debug; // eslint-disable-line no-unused-vars
 
 
 /*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
-
-
-/*
 * PRIVATE PROPERTIES
 * var _privateBar;
 */
@@ -47,6 +34,12 @@ var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
 /*
 * PRIVATE METHODS
 * function _privateBar(){ var self = this; return this.foo; }
+*/
+
+/*
+* PUBLIC METHODS
+* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
+* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
 */
 
 /**
@@ -101,26 +94,13 @@ function stripTrailingSlash(input) {
 
 
 /*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// TEXT TRANSFORMS
-// =============================================================================
-// stringify
-Main.prototype.safeStringify = safeStringify;
-// parse
-Main.prototype.safeParse = safeParse;
-// strip html
-Main.prototype.htmlToText = htmlToText;
-// delete trailing slash from the end of a string
-Main.prototype.stripTrailingSlash = stripTrailingSlash;
-
-
-/*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	safeStringify,
+	safeParse,
+	htmlToText,
+	stripTrailingSlash,
+};

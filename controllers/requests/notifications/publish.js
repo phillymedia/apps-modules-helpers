@@ -1,6 +1,6 @@
 /**
  * PHILLLY HELPERS
- * requests/feed/search
+ * requests/notifications/publish
  * Hopefully reusable class of functions.
  */
 
@@ -21,17 +21,6 @@ const _hints = conf.sns.hints;
 
 
 /*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
-
-/*
 * PRIVATE PROPERTIES
 * var _privateBar;
 */
@@ -42,7 +31,7 @@ function Main() {
 */
 
 /**
- * Get the inputs from the feed/search route.
+ * Get the inputs from the notifications/publish route.
  *
  * @method getInput
  * @param {string} targetHint
@@ -117,19 +106,10 @@ function getInput(req, res, next) {
 
 
 /*
-* EXPORTED METHODS
-* Foo.prototype.publicBar = publicBar;
-*/
-
-// ADD INPUT
-// =============================================================================
-// for feed/search
-Main.prototype.getInput = getInput;
-
-
-/*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	getInput,
+};

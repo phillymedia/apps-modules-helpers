@@ -1,6 +1,6 @@
 /**
  * PHILLLY HELPERS
- * requests/feed/search
+ * requests/notifications/endpoint
  * Hopefully reusable class of functions.
  */
 
@@ -11,18 +11,6 @@ const root = "../../..";
 // sibling modules
 const errors = require(`${root}/controllers/errors`);
 // const transforms = require(`${root}/controllers/transforms`);
-
-
-/*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
 
 
 /*
@@ -42,7 +30,7 @@ function Main() {
 */
 
 /**
- * Get the inputs from the feed/search route.
+ * Get the inputs from the notifications/endpoint route.
  *
  * @method getInput
  * @param {object} req
@@ -71,19 +59,10 @@ function getInput(req, res, next) {
 
 
 /*
-* EXPORTED METHODS
-* Foo.prototype.publicBar = publicBar;
-*/
-
-// ADD INPUT
-// =============================================================================
-// for feed/search
-Main.prototype.getInput = getInput;
-
-
-/*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	getInput,
+};

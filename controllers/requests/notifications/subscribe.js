@@ -1,6 +1,6 @@
 /**
  * PHILLLY HELPERS
- * requests/feed/search
+ * requests/notifications/subscribe
  * Hopefully reusable class of functions.
  */
 
@@ -20,17 +20,6 @@ const _debug = conf.debug; // eslint-disable-line no-unused-vars
 
 
 /*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
-
-/*
 * PRIVATE PROPERTIES
 * var _privateBar;
 */
@@ -40,8 +29,14 @@ function Main() {
 * function _privateBar(){ var self = this; return this.foo; }
 */
 
+/*
+* PUBLIC METHODS
+* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
+* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
+*/
+
 /**
- * Get the inputs from the feed/search route.
+ * Get the inputs from the notifications/subscribe route.
  *
  * @method getInput
  * @param {object} req
@@ -70,21 +65,12 @@ function getInput(req, res, next) {
 	return next();
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// ADD INPUT
-// =============================================================================
-// for feed/search
-Main.prototype.getInput = getInput;
-
 
 /*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	getInput,
+};

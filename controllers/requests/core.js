@@ -1,6 +1,6 @@
 /**
  * PHILLLY HELPERS
- *
+ * request module
  * Hopefully reusable class of functions.
  */
 
@@ -17,18 +17,6 @@ const transforms = require(`${root}/controllers/transforms`);
 
 // CONFIG -------------------------------
 const _debug = conf.debug; // eslint-disable-line no-unused-vars
-
-
-/*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
 
 
 /*
@@ -104,10 +92,24 @@ function buildInput(req) {
 	return input;
 }
 
+/**
+ * Does input have content?
+ *
+ * @method inputHasContent
+ * @param {object} input
+ * @return {boolean}
+ */
 function inputHasContent(input) {
 	// array/object? and not empty?
 	return (input && _.isObject(input) && !_.isEmpty(input));
 }
+
+
+/*
+* PUBLIC METHODS
+* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
+* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
+*/
 
 // needed for most routes
 function standardizeInput(req, res, next) {
@@ -154,23 +156,13 @@ function getRawBody(req, res, next) {
 	});
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// PARSE INPUT
-// =============================================================================
-// put everything onto input
-Main.prototype.standardizeInput = standardizeInput;
-// get the raw body
-Main.prototype.getRawBody = getRawBody;
-
 
 /*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	standardizeInput,
+	getRawBody,
+};

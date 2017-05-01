@@ -19,18 +19,6 @@ const _debug = conf.debug; // eslint-disable-line no-unused-vars
 
 
 /*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
-
-
-/*
 * PRIVATE PROPERTIES
 * var _privateBar;
 */
@@ -40,16 +28,13 @@ function Main() {
 * function _privateBar(){ var self = this; return this.foo; }
 */
 
-// ERROR HANDLING
-// =============================================================================
-
 /**
 * Print error to the console.
 *
-* @method _printError
+* @method printError
 * @param {Object} err 				The error.
 */
-function _printError(err) {
+function printError(err) {
 	// prepare the error
 	let printableError = "";
 	// log to console in debug mode
@@ -84,16 +69,42 @@ function _printError(err) {
 }
 
 /**
+* Handle Mongoose-specific errors.
+*
+* @method mongooseErrorHandler
+* @param {Object} err 				The error.
+* @return {Object} err		 		The formatted error.
+*/
+function mongooseErrorHandler(err) {
+	// catch mongoose validation and reformat them
+	if (err instanceof mongoose.Error.ValidationError) {
+		// log error as it exists
+		printError(err.errors);
+		// make it a standard error for returning
+		return makeError("InvalidFields", transforms.safeStringify(err.errors), "error > mongooseErrorHandler", 1100, true);
+	}
+	// return errors
+	return err;
+}
+
+
+/*
+* PUBLIC METHODS
+* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
+* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
+*/
+
+/**
 * Create an error for our internal use.
 *
-* @method _makeError
+* @method makeError
 * @param {String} code 				The error's code, e.g. "MissingParameter".
 * @param {String} message 			The error's message, e.g. "A parameter is missing".
 * @param {String} statusCode 		The error's message, e.g. 402.
 * @param {Bool} surfaceMessage 		Should we show this to the end user?
 * @return {Object} err		 		The formatted error.
 */
-function _makeError(code, message, loc, statusCode, surfaceMessage) {
+function makeError(code, message, loc, statusCode, surfaceMessage) {
 	// create a new error object, using the error as a message
 	const err = new Error(message);
 	// set code (e.g., "BadRequest")
@@ -120,16 +131,16 @@ function _makeError(code, message, loc, statusCode, surfaceMessage) {
 * @param {Object} res 				The response.
 * @return {Object} err		 		The formatted error.
 */
-function _formatError(err, res) {
+function formatError(err, res) {
 	if (!err) {
 		// create properly-formatted but generic error
-		err = _makeError("UnknownError", "Something went wrong. Refer to logs.", "Error formatError");
+		err = makeError("UnknownError", "Something went wrong. Refer to logs.", "Error formatError");
 		// add res to error for additional tracking
 		err.res = res;
 	}
 	else if (!err.code || !err.statusCode) {
 		// mongoose error checking
-		err = _mongooseErrorHandler(err);
+		err = mongooseErrorHandler(err);
 		// save err as warn
 		const warn = err;
 		// use specific code if one exists
@@ -145,7 +156,7 @@ function _formatError(err, res) {
 			err.loc = "Error formatError";
 		}
 		// create properly-formatted error
-		err = _makeError(err.code, err.message, err.loc);
+		err = makeError(err.code, err.message, err.loc);
 		// save original malformed error as err.warn
 		err.warn = warn;
 		// add res to error for additional tracking
@@ -155,46 +166,13 @@ function _formatError(err, res) {
 	return err;
 }
 
-/**
-* Handle Mongoose-specific errors.
-*
-* @method _mongooseErrorHandler
-* @param {Object} err 				The error.
-* @return {Object} err		 		The formatted error.
-*/
-function _mongooseErrorHandler(err) {
-	// catch mongoose validation and reformat them
-	if (err instanceof mongoose.Error.ValidationError) {
-		// log error as it exists
-		_printError(err.errors);
-		// make it a standard error for returning
-		return _makeError("InvalidFields", transforms.safeStringify(err.errors), "error > _mongooseErrorHandler", 1100, true);
-	}
-	return err;
-}
-
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// ERROR HANDLING
-// =============================================================================
-// construct an Error
-Main.prototype.makeError = _makeError;
-
-// ensure properly formatted error
-Main.prototype.formatError = _formatError;
-
-// mongoose error handling
-Main.prototype.mongooseErrorHandler = _mongooseErrorHandler;
-
 
 /*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	makeError,
+	formatError,
+};

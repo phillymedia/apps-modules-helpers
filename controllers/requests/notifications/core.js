@@ -1,6 +1,6 @@
 /**
  * PHILLLY HELPERS
- * requests/feed/detail
+ * requests/notifications/core
  * Hopefully reusable class of functions.
  */
 
@@ -18,18 +18,6 @@ const errors = require(`${root}/controllers/errors`);
 // CONFIG -------------------------------
 const _debug = conf.debug; // eslint-disable-line no-unused-vars
 const _hints = conf.sns.hints;
-
-
-/*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
 
 
 /*
@@ -194,19 +182,10 @@ function getInput(req, res, next) {
 
 
 /*
-* EXPORTED METHODS
-* Foo.prototype.publicBar = publicBar;
-*/
-
-// ADD INPUT
-// =============================================================================
-// for feed/search
-Main.prototype.getInputHints = getInput;
-
-
-/*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	getInput,
+};

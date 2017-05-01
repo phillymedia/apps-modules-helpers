@@ -15,19 +15,6 @@ const _debug = conf.debug; // eslint-disable-line no-unused-vars
 
 
 /*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-
-function Main() {
-	/*
-	* PUBLIC PROPERTIES
-	* this.publicBar = foo;
-	*/
-}
-
-
-/*
 * PRIVATE PROPERTIES
 * var _privateBar;
 */
@@ -41,6 +28,12 @@ var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
 /*
 * PRIVATE METHODS
 * function _privateBar(){ var self = this; return this.foo; }
+*/
+
+/*
+* PUBLIC METHODS
+* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
+* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
 */
 
 /**
@@ -98,24 +91,13 @@ function minutesFromNow(minutes, reversed) {
 
 
 /*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// TIMERS
-// =============================================================================
-// time a given function
-Main.prototype.start = start;
-Main.prototype.stop = stop;
-// manipulate a date
-Main.prototype.now = now;
-Main.prototype.minutesFromNow = minutesFromNow;
-
-
-/*
 * EXPORT THE FINISHED CLASS
 * module.exports = className;
 */
 
-module.exports = new Main();
+module.exports = {
+	start,
+	stop,
+	now,
+	minutesFromNow,
+};
