@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "philly-helpers",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A group of hopefully-reusable functions.",
   "repository": {
     "type": "git",
@@ -9,8 +9,7 @@
   },
   "main": "./dist/app.js",
   "scripts": {
-    "dev": "nodemon lib/app.js --exec babel-node",
-    "dist": "babel lib -d dist",
+    "dist": "babel lib -d dist --sourcemaps inline",
     "start": "node dist/app.js",
     "test": "mocha"
   },
@@ -41,7 +40,6 @@
     "mocha": "^3.1.2",
     "mock-express-request": "^0.2.0",
     "mock-express-response": "^0.2.0",
-    "nodemon": "^1.11.0",
     "sinon": "^2.2.0"
   }
 }

@@ -77,9 +77,8 @@ function sendUnauthorized(req, res) {
 * @param {Object} err 				The error, if any.
 * @param {Object} req 				The original request.
 * @param {Object} res 				The response.
-* @return {Function} next		 	Next!
 */
-function sendFailure(err, req, res, next) {
+function sendFailure(err, req, res) {
 	// save the server response
 	var savedRes = res;
 	// ensure properly formatted error
@@ -104,8 +103,6 @@ function sendFailure(err, req, res, next) {
 	res.status(err.statusCode);
 	res.send(input);
 	res.end();
-	// done
-	return next();
 }
 
 /**
@@ -132,7 +129,9 @@ function prepSuccess(req, res, next) {
 * @param {Object} res 				The response.
 * @param {Object} sendData 			The data.
 */
-function sendSuccess(req, res, next) {
+function sendSuccess(req, res) {
+	// eslint-disable-line consistent-return
+	console.log("About to send success. Headers sent?", res.headersSent);
 	// res.sendData = { data: "some kind of data" };
 	if (_debug) {
 		console.log("Success!", "sent data:", res.sendData);
@@ -140,16 +139,17 @@ function sendSuccess(req, res, next) {
 	var input = transforms.safeStringify(res.sendData);
 	// unset(res, "sendData");
 	if ((0, _lodash.isError)(input)) {
+		console.log("Coult not send success. Headers sent?", res.headersSent);
 		console.error("Could not send success!", input.stack);
-		return sendFailure(input, req, res, next);
+		return sendFailure(input, req, res);
 	}
+	console.log("About to set headers. Headers sent?", res.headersSent);
 	// send success
 	setHeaders(res);
+	console.log("Headers have been set. Headers sent?", res.headersSent);
 	res.status(200);
 	res.send(input);
 	res.end();
-	// done
-	return next();
 }
 
 // ROUTE FUNCTIONS
@@ -184,11 +184,10 @@ function handleFailure(err, req, res, next) {
 * @param {Object} req 				The original request.
 * @param {Object} res 				The response.
 */
-function handleRobots(req, res, next) {
+function handleRobots(req, res) {
 	res.type("text/plain");
 	res.send("User-agent: *\nDisallow: /");
 	res.end();
-	next();
 }
 
 /*
