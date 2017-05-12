@@ -131,7 +131,6 @@ function prepSuccess(req, res, next) {
 */
 function sendSuccess(req, res) {
 	// eslint-disable-line consistent-return
-	console.log("About to send success. Headers sent?", res.headersSent);
 	// res.sendData = { data: "some kind of data" };
 	if (_debug) {
 		console.log("Success!", "sent data:", res.sendData);
@@ -139,14 +138,11 @@ function sendSuccess(req, res) {
 	var input = transforms.safeStringify(res.sendData);
 	// unset(res, "sendData");
 	if ((0, _lodash.isError)(input)) {
-		console.log("Coult not send success. Headers sent?", res.headersSent);
 		console.error("Could not send success!", input.stack);
 		return sendFailure(input, req, res);
 	}
-	console.log("About to set headers. Headers sent?", res.headersSent);
 	// send success
 	setHeaders(res);
-	console.log("Headers have been set. Headers sent?", res.headersSent);
 	res.status(200);
 	res.send(input);
 	res.end();
