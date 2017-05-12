@@ -46,11 +46,9 @@ function robotsStatus(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	handleRobots(request, response, (err) => {
-		expect(err).to.be.undefined;
-		expect(response.statusCode).to.equal(200);
-		done();
-	});
+	handleRobots(request, response);
+	expect(response.statusCode).to.equal(200);
+	done();
 }
 
 

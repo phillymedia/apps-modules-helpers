@@ -106,12 +106,10 @@ function successHeaders(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	sendSuccess(request, response, (err) => {
-		expect(err).to.be.undefined;
-		// console.log(response);
-		expect(response).to.have.header("content-type", /json/);
-		done();
-	});
+	sendSuccess(request, response);
+	// console.log(response);
+	expect(response).to.have.header("content-type", /json/);
+	done();
 }
 
 /**
@@ -130,12 +128,9 @@ function successStatus(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	sendSuccess(request, response, (err) => {
-		expect(err).to.be.undefined;
-		// console.log(response);
-		expect(response.statusCode).to.equal(200);
-		done();
-	});
+	sendSuccess(request, response);
+	expect(response.statusCode).to.equal(200);
+	done();
 }
 
 

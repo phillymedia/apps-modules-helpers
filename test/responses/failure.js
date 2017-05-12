@@ -51,14 +51,11 @@ function failureHeaders(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	sendFailure(testError, request, response, (err) => {
-		// should have thrown no errors
-		expect(err).to.be.undefined;
-		// proper headers
-		expect(response).to.have.header("content-type", /json/);
-		// done
-		done();
-	});
+	sendFailure(testError, request, response);
+	// proper headers
+	expect(response).to.have.header("content-type", /json/);
+	// done
+	done();
 }
 
 /**
@@ -77,14 +74,11 @@ function failureStatus(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	sendFailure(testError, request, response, (err) => {
-		// should have thrown no errors
-		expect(err).to.be.undefined;
-		// expect response to be 500 (default for errors)
-		expect(response.statusCode).to.equal(500);
-		// done
-		done();
-	});
+	sendFailure(testError, request, response);
+	// expect response to be 500 (default for errors)
+	expect(response.statusCode).to.equal(500);
+	// done
+	done();
 }
 
 /**
@@ -103,14 +97,11 @@ function failureHeadersError(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	sendFailure(null, request, response, (err) => {
-		// should have thrown no errors
-		expect(err).to.be.undefined;
-		// headers
-		expect(response).to.have.header("content-type", /json/);
-		// done
-		done();
-	});
+	sendFailure(null, request, response);
+	// headers
+	expect(response).to.have.header("content-type", /json/);
+	// done
+	done();
 }
 
 /**
@@ -129,14 +120,11 @@ function failureStatusError(done) {
 	// mock a response
 	const response = new MockExpressReponse();
 	// call send success
-	sendFailure(null, request, response, (err) => {
-		// should have thrown no errors
-		expect(err).to.be.undefined;
-		// expect response to be 501 (means bad error was passed in)
-		expect(response.statusCode).to.equal(501);
-		// done
-		done();
-	});
+	sendFailure(null, request, response);
+	// expect response to be 501 (means bad error was passed in)
+	expect(response.statusCode).to.equal(501);
+	// done
+	done();
 }
 
 

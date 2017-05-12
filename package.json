@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "philly-helpers",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A group of hopefully-reusable functions.",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
     "dev": "nodemon lib/app.js --exec babel-node",
     "dist": "babel lib -d dist",
     "start": "node dist/app.js",
-    "test": "mocha --compilers js:babel-register --reporter spec"
+    "test": "mocha"
   },
   "author": "ejbaker",
   "license": "MIT",
