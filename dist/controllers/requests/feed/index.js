@@ -1,22 +1,25 @@
 "use strict";
 
-/**
- * PHILLLY HELPERS
- * requests/feed
- * Hopefully reusable class of functions.
- */
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
-// SIBLING MODULES
-// =============================================================================
-var detail = require("./detail");
-var search = require("./search");
+var _detail = require("./detail");
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+Object.defineProperty(exports, "getInputDetail", {
+	enumerable: true,
+	get: function get() {
+		return _interopRequireDefault(_detail).default;
+	}
+});
 
-module.exports = {
-  getInputDetail: detail.getInput,
-  getInputSearch: search.getInput
-};
+var _search = require("./search");
+
+Object.defineProperty(exports, "getInputSearch", {
+	enumerable: true,
+	get: function get() {
+		return _interopRequireDefault(_search).default;
+	}
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

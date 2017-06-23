@@ -3,11 +3,7 @@
 
 // dependencies
 import { expect } from "chai";
-const {
-	makeError,
-	formatError,
-	// mongooseErrorHandler,
-} = require("MAIN");
+import { makeError, formatError } from "MAIN";
 
 // code and message are required
 const testError = {

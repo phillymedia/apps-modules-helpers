@@ -1,42 +1,16 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- * requests/feed/detail
- * Hopefully reusable class of functions.
- */
+var _errors = require("../../errors");
 
-// MOST DEPENDENCIES
+// METHODS
 // =============================================================================
-// config
-var conf = require("../../../config");
-// third-party libraries
-
-// sibling modules
-var errors = require("../../errors");
-// const transforms = require("COMP/transforms");
-
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
 /**
  * Get the inputs from the feed/search route.
@@ -48,24 +22,25 @@ var _debug = conf.debug; // eslint-disable-line no-unused-vars
  * @returns {function}
  */
 // only when pulling feed detail
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 function getInput(req, res, next) {
-  // grab input from the request input
-  var id = req.input.id;
-  // if no id, abort!
-  if (!id || !(0, _lodash.isArray)(id)) {
-    return next(errors.makeError("NoId", "No ID specified.", 400));
-  }
-  // save the id to req.id
-  req.id = id;
-  // continue processing
-  return next();
+	// grab input from the request input
+	var id = req.input.id;
+	// if no id, or id is an empty array, abort!
+	if (!id || (0, _lodash.isArray)(id) && (0, _lodash.isEmpty)(id)) {
+		return next((0, _errors.makeError)("NoId", "No ID specified.", 400));
+	}
+	// save the id to req.id
+	req.id = id;
+	// continue processing
+	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-  getInput: getInput
-};
+// APP -------------------------------
+// sibling modules
+exports.default = getInput;

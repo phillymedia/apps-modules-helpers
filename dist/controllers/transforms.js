@@ -1,48 +1,25 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.stripTrailingSlash = exports.htmlToText = exports.safeParse = exports.safeStringify = undefined;
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- *
- * Hopefully reusable class of functions.
- */
+var _striptags = require("striptags");
 
-// MOST DEPENDENCIES
+var _striptags2 = _interopRequireDefault(_striptags);
+
+var _htmlEntities = require("html-entities");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var htmlEntities = new _htmlEntities.AllHtmlEntities();
+
+// METHODS
 // =============================================================================
-var conf = require("../config");
-// third-party libraries
-
-// sibling modules
-var striptags = require("striptags");
-var Entities = require("html-entities").AllHtmlEntities;
-var htmlEntities = new Entities();
-
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-// DEVICE -------------------------------
-/*
-var _AndroidClient = global.nconf.get("ClientUserAgentHint:Android");
-var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
 /**
 * Stringify with JSON safely.
@@ -51,6 +28,9 @@ var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
 * @param   {String} input						The object to stringify.
 * @return  {Object} input/{Object} error		Parsed string, or error.
 **/
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 function safeStringify(input) {
 	return (0, _lodash.attempt)(JSON.stringify.bind(null, input));
 }
@@ -77,7 +57,7 @@ function safeParse(input) {
 * @return  {String} input						Formatted string.
 **/
 function htmlToText(input) {
-	return striptags(htmlEntities.decode(input), [], " ").replace(/\s{2,}/g, " ");
+	return (0, _striptags2.default)(htmlEntities.decode(input), [], " ").replace(/\s{2,}/g, " ");
 }
 
 /**
@@ -94,14 +74,10 @@ function stripTrailingSlash(input) {
 	return (0, _lodash.trimEnd)(input, "/");
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	safeStringify: safeStringify,
-	safeParse: safeParse,
-	htmlToText: htmlToText,
-	stripTrailingSlash: stripTrailingSlash
-};
+exports.safeStringify = safeStringify;
+exports.safeParse = safeParse;
+exports.htmlToText = htmlToText;
+exports.stripTrailingSlash = stripTrailingSlash;

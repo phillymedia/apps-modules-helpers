@@ -1,40 +1,11 @@
 "use strict";
 
-/**
- * PHILLLY HELPERS
- *
- * Hopefully reusable class of functions.
- */
-
-// MOST DEPENDENCIES
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+// METHODS
 // =============================================================================
-var conf = require("../config");
-
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-// DEVICE -------------------------------
-/*
-var _AndroidClient = global.nconf.get("ClientUserAgentHint:Android");
-var _iOSClient = global.nconf.get("ClientUserAgentHint:iOS");
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
 /**
 * Start the timer.
@@ -105,14 +76,10 @@ function minutesFromNow() {
 	return currentTime;
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	start: start,
-	stop: stop,
-	now: now,
-	minutesFromNow: minutesFromNow
-};
+exports.start = start;
+exports.stop = stop;
+exports.now = now;
+exports.minutesFromNow = minutesFromNow;

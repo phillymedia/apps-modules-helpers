@@ -1,36 +1,21 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.sendSuccess = exports.prepSuccess = exports.sendFailure = exports.sendUnauthorized = undefined;
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- *
- * Hopefully reusable class of functions.
- */
+var _config = require("../../config");
 
-// MOST DEPENDENCIES
+var _errors = require("../errors");
+
+var _transforms = require("../transforms");
+
+// METHODS
 // =============================================================================
-// config
-var conf = require("../config");
-// third-party libraries
-
-// sibling modules
-var errors = require("./errors");
-var transforms = require("./transforms");
-
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
+// PRIVATE -------------------------------
 
 /**
  * Set headers if they haven't already been sent.
@@ -39,6 +24,11 @@ var _debug = conf.debug; // eslint-disable-line no-unused-vars
  * @param {object} res
  * @param {string} contentType
  */
+
+// sibling modules
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 function setHeaders(res) {
 	var contentType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "application/json";
 
@@ -47,14 +37,7 @@ function setHeaders(res) {
 	}
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// SEND RESPONSES
-// =============================================================================
+// PUBLIC -------------------------------
 
 /**
 * Send a response to an unauthorized call.
@@ -63,6 +46,8 @@ function setHeaders(res) {
 * @param {Object} res 				The response.
 * @return {Function} next		 	Next!
 */
+
+// APP -------------------------------
 function sendUnauthorized(req, res) {
 	setHeaders(res);
 	res.status(403);
@@ -71,7 +56,7 @@ function sendUnauthorized(req, res) {
 }
 
 /**
-* Send a response to an errors.
+* Send a response to an error.
 *
 * @method sendFailure
 * @param {Object} err 				The error, if any.
@@ -82,9 +67,9 @@ function sendFailure(err, req, res) {
 	// save the server response
 	var savedRes = res;
 	// ensure properly formatted error
-	err = errors.formatError(err, savedRes);
+	err = (0, _errors.formatError)(err, savedRes);
 	// stringify input
-	var input = transforms.safeStringify({
+	var input = (0, _transforms.safeStringify)({
 		error: err.code,
 		message: err.message,
 		surfaceMessage: err.surfaceMessage
@@ -92,7 +77,7 @@ function sendFailure(err, req, res) {
 	// this will either be a nice object, or a new error
 	if ((0, _lodash.isError)(input)) {
 		console.error("Could not stringify original error!", input.stack);
-		input = transforms.safeStringify({
+		input = (0, _transforms.safeStringify)({
 			error: input.code,
 			message: input.message,
 			surfaceMessage: false
@@ -132,10 +117,10 @@ function prepSuccess(req, res, next) {
 function sendSuccess(req, res) {
 	// eslint-disable-line consistent-return
 	// res.sendData = { data: "some kind of data" };
-	if (_debug) {
+	if (_config.debug) {
 		console.log("Success!", "sent data:", res.sendData);
 	}
-	var input = transforms.safeStringify(res.sendData);
+	var input = (0, _transforms.safeStringify)(res.sendData);
 	// unset(res, "sendData");
 	if ((0, _lodash.isError)(input)) {
 		console.error("Could not send success!", input.stack);
@@ -148,55 +133,10 @@ function sendSuccess(req, res) {
 	res.end();
 }
 
-// ROUTE FUNCTIONS
+// EXPORTS
 // =============================================================================
 
-/**
-* Handle successful requests.
-*
-* @method handleSuccess
-* @param {Object} req 				The original request.
-* @param {Object} res 				The response.
-*/
-function handleSuccess(req, res, next) {
-	return sendSuccess(req, res, next);
-}
-
-/**
-* Handle error requests.
-*
-* @method handleFailure
-* @param {Object} req 				The original request.
-* @param {Object} res 				The response.
-*/
-function handleFailure(err, req, res, next) {
-	return sendFailure(err, req, res, next);
-}
-
-/**
-* Handle robot requests.
-*
-* @method handleRobots
-* @param {Object} req 				The original request.
-* @param {Object} res 				The response.
-*/
-function handleRobots(req, res) {
-	res.type("text/plain");
-	res.send("User-agent: *\nDisallow: /");
-	res.end();
-}
-
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
-
-module.exports = {
-	sendUnauthorized: sendUnauthorized,
-	sendFailure: sendFailure,
-	prepSuccess: prepSuccess,
-	sendSuccess: sendSuccess,
-	handleFailure: handleFailure,
-	handleSuccess: handleSuccess,
-	handleRobots: handleRobots
-};
+exports.sendUnauthorized = sendUnauthorized;
+exports.sendFailure = sendFailure;
+exports.prepSuccess = prepSuccess;
+exports.sendSuccess = sendSuccess;

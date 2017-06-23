@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
 
 // dependencies
@@ -56,10 +55,8 @@ const testInputSettings = {
  */
 const getRawBodyTest = {
 	emptyNoErrors: rawBodyEmptyNoErrors,
-	hasNoBody: rawBodyEmptyNoBody,
 	noErrors: rawBodyNoErrors,
 	hasBody: rawBodyHasBody,
-	matchesBody: rawBodyMatchesBody,
 };
 
 /**
@@ -81,31 +78,8 @@ function rawBodyEmptyNoErrors(done) {
 			return done(err);
 		}
 		// otherwise...
-		expect(err).to.be.undefined;
-		return done();
-	});
-}
-
-/**
- * Test the getRawBody method - no raw body when no body.
- *
- * @method rawBodyEmptyNoBody
- * @param {function} done
- * @return {function}
- */
-function rawBodyEmptyNoBody(done) {
-	// mock a request
-	const request = new MockExpressRequest();
-	// mock a response
-	const response = new MockExpressReponse();
-	// call send success
-	getRawBody(request, response, (err) => {
-		// handle errors
-		if (err) {
-			return done(err);
-		}
-		// otherwise...
-		expect(response.rawBody).to.be.undefined;
+		expect(err).to.not.exist;
+		expect(response.rawBody).to.not.exist;
 		return done();
 	});
 }
@@ -134,7 +108,7 @@ function rawBodyNoErrors(done) {
 			return done(err);
 		}
 		// otherwise...
-		expect(err).to.be.undefined;
+		expect(err).to.not.exist;
 		return done();
 	});
 }
@@ -162,32 +136,6 @@ function rawBodyHasBody(done) {
 			return done(err);
 		}
 		// otherwise...
-		expect(request.rawBody).to.not.be.undefined;
-		return done();
-	});
-}
-
-/**
- * Test the getRawBody method - returns matching raw body.
- *
- * @method rawBodyMatchesBody
- * @param {function} done
- * @return {function}
- */
-function rawBodyMatchesBody(done) {
-	// mock a request
-	const request = new MockExpressRequest(testRawSettings);
-	// write to the stream
-	request.write(testRawBody);
-	// end the stream
-	request.end();
-	// mock a response
-	const response = new MockExpressReponse();
-	// call send success
-	getRawBody(request, response, (err) => {
-		if (err) {
-			return done(err);
-		}
 		expect(request.rawBody).to.equal(testRawBody);
 		return done();
 	});
@@ -203,10 +151,8 @@ function rawBodyMatchesBody(done) {
  * @return {function}
  */
 const standardizeInputTest = {
-	emptyErrorsType: inputEmptyType,
-	emptyErrorsCode: inputEmptyCode,
-	noErrors: inputNoErrors,
-	inputMatches,
+	hasError: inputHasError,
+	hasInput: inputMatches,
 };
 
 /**
@@ -216,7 +162,7 @@ const standardizeInputTest = {
  * @param {function} done
  * @return {function}
  */
-function inputEmptyType(done) {
+function inputHasError(done) {
 	// mock a request
 	const request = new MockExpressRequest({
 		method: "GET",
@@ -226,51 +172,8 @@ function inputEmptyType(done) {
 	// call send success
 	standardizeInput(request, response, (err) => {
 		expect(err).to.be.an("error");
-		done();
-	});
-}
-/**
- * Test the standardizeInput method - empty input should be specific error.
- *
- * @method inputEmpty
- * @param {function} done
- * @return {function}
- */
-function inputEmptyCode(done) {
-	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
-	// call send success
-	standardizeInput(request, response, (err) => {
 		expect(err).to.have.property("code").that.equals("NoContent");
 		done();
-	});
-}
-
-/**
- * Test the standardizeInput method - returns matching raw body.
- *
- * @method inputNoErrors
- * @param {function} done
- * @return {function}
- */
-function inputNoErrors(done) {
-	// mock a request
-	const request = new MockExpressRequest(testInputSettings);
-	// mock a response
-	const response = new MockExpressReponse();
-	// call send success
-	standardizeInput(request, response, (err) => {
-		// handle errors
-		if (err) {
-			return done(err);
-		}
-		// otherwise...
-		expect(err).to.be.undefined;
-		return done();
 	});
 }
 
@@ -293,7 +196,7 @@ function inputMatches(done) {
 			return done(err);
 		}
 		// otherwise...
-		expect(request.input).to.not.be.undefined;
+		expect(request.input).to.exist;
 		expect(request.input).to.have.property("id").that.equals(testInputSettings.params.id);
 		return done();
 	});
@@ -313,23 +216,19 @@ function tests() {
 	describe("Get Raw Body", () => {
 		context("when no data sent", () => {
 			it("should not error", getRawBodyTest.emptyNoErrors);
-			it("should not have raw body property", getRawBodyTest.hasNoBody);
 		});
 		context("when data sent", () => {
 			it("should not error", getRawBodyTest.noErrors);
 			it("should have raw body property", getRawBodyTest.hasBody);
-			it("should match test raw body", getRawBodyTest.matchesBody);
 		});
 	});
 	// standardize input
 	describe("Standardize Input", () => {
 		context("when no params sent", () => {
-			it("should error", standardizeInputTest.emptyErrorsType);
-			it("should be correct error", standardizeInputTest.emptyErrorsCode);
+			it("should error", standardizeInputTest.hasError);
 		});
 		context("when params sent", () => {
-			it("should not error", standardizeInputTest.noErrors);
-			it("should have matching input", standardizeInputTest.inputMatches);
+			it("should have matching input", standardizeInputTest.hasInput);
 		});
 	});
 }

@@ -1,23 +1,31 @@
 "use strict";
 
-/**
- * PHILLLY HELPERS
- * requests/system
- * Hopefully reusable class of functions.
- */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-// SIBLING MODULES
-// =============================================================================
-var core = require("./core");
-var admin = require("./admin");
+var _core = require("./core");
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+Object.defineProperty(exports, "getInput", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_core).default;
+  }
+});
 
-module.exports = {
-  getInput: core.getInput,
-  getInputAdmin: admin.getInput,
-  getInputAdminDelete: admin.getInputDelete
-};
+var _admin = require("./admin");
+
+Object.defineProperty(exports, "getInputAdmin", {
+  enumerable: true,
+  get: function get() {
+    return _admin.getInput;
+  }
+});
+Object.defineProperty(exports, "getInputAdminDelete", {
+  enumerable: true,
+  get: function get() {
+    return _admin.getInputDelete;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

@@ -1,39 +1,33 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- * requests/notifications/core
- * Hopefully reusable class of functions.
- */
+var _config = require("../../../config");
 
-// MOST DEPENDENCIES
+var _errors = require("../../errors");
+
+// PROPERTIES
 // =============================================================================
-var conf = require("../../../config");
-// third-party libraries
+// PRIVATE -------------------------------
 
+// APP -------------------------------
+// config
+var _hints = _config.sns.hints;
 // sibling modules
-var errors = require("../../errors");
-// const transforms = require("COMP/transforms");
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 
+var _sportsNow = _config.sns.cats.sportsNow;
+var _phillyCom = _config.sns.cats.phillyCom;
 
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-var _hints = conf.sns.hints;
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-var _sportsNow = conf.sns.cats.sportsNow;
-var _phillyCom = conf.sns.cats.phillyCom;
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
+// METHODS
+// =============================================================================
+// PRIVATE -------------------------------
 
 /**
  * Turn the hints from our data into the expected information for AWS.
@@ -127,11 +121,7 @@ function getHints(userAgent, subHints, unsubHints) {
 	return appData;
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
 /**
  * Get input from the notifications route.
@@ -172,7 +162,7 @@ function getInput(req, res, next) {
 	var hints = getHints(userAgent, subHint, unsubHint);
 	// check to make sure data is set
 	if (!hints) {
-		return next(errors.makeError("InvalidRequest", "Unauthorized access."));
+		return next((0, _errors.makeError)("InvalidRequest", "Unauthorized access."));
 	}
 	// if all is good, set input to request
 	req.appHint = hints.appHint;
@@ -182,11 +172,7 @@ function getInput(req, res, next) {
 	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	getInput: getInput
-};
+exports.default = getInput;

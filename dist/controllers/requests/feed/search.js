@@ -1,41 +1,19 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- * requests/feed/search
- * Hopefully reusable class of functions.
- */
+var _errors = require("../../errors");
 
-// MOST DEPENDENCIES
-// =============================================================================
-var conf = require("../../../config");
-// third-party libraries
-
-// sibling modules
-var errors = require("../../errors");
 // const transforms = require("COMP/transforms");
 
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
 
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// METHODS
+// =============================================================================
+// PUBLIC -------------------------------
 
 /**
  * Get the inputs from the feed/search route.
@@ -46,24 +24,25 @@ var _debug = conf.debug; // eslint-disable-line no-unused-vars
  * @param {function} next
  * @returns {function}
  */
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 function getInput(req, res, next) {
-  // grab input from the request input
-  var search = req.input.search;
-  // if no id, abort!
-  if (!search || !(0, _lodash.isString)(search)) {
-    return next(errors.makeError("NoSearchTerm", "No key words specified.", 400));
-  }
-  // save the id to req.id
-  req.search = search;
-  // continue processing
-  return next();
+	// grab input from the request input
+	var search = req.input.search;
+	// if no id, abort!
+	if (!search || !(0, _lodash.isString)(search)) {
+		return next((0, _errors.makeError)("NoSearchTerm", "No key words specified.", 400));
+	}
+	// save the id to req.id
+	req.search = search;
+	// continue processing
+	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-  getInput: getInput
-};
+// APP -------------------------------
+// sibling modules
+exports.default = getInput;

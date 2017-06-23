@@ -1,133 +1,184 @@
 "use strict";
 
-/**
- * PHILLLY HELPERS
- *
- * Hopefully reusable class of functions.
- */
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
+var _errors = require("./controllers/errors");
+
+Object.defineProperty(exports, "makeError", {
+	enumerable: true,
+	get: function get() {
+		return _errors.makeError;
+	}
+});
+Object.defineProperty(exports, "formatError", {
+	enumerable: true,
+	get: function get() {
+		return _errors.formatError;
+	}
+});
+Object.defineProperty(exports, "mongooseErrorHandler", {
+	enumerable: true,
+	get: function get() {
+		return _errors.mongooseErrorHandler;
+	}
+});
+
+var _requests = require("./controllers/requests");
+
+Object.defineProperty(exports, "getRawBody", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getRawBody;
+	}
+});
+Object.defineProperty(exports, "standardizeInput", {
+	enumerable: true,
+	get: function get() {
+		return _requests.standardizeInput;
+	}
+});
+Object.defineProperty(exports, "getInputFeedDetail", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getInputFeedDetail;
+	}
+});
+Object.defineProperty(exports, "getInputFeedSearch", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getInputFeedSearch;
+	}
+});
+Object.defineProperty(exports, "getInputDeviceHints", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getInputDeviceHints;
+	}
+});
+Object.defineProperty(exports, "getInputDeviceSubscribe", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getInputDeviceSubscribe;
+	}
+});
+Object.defineProperty(exports, "getInputDevicePublish", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getInputDevicePublish;
+	}
+});
+Object.defineProperty(exports, "getInputDeviceEndpoint", {
+	enumerable: true,
+	get: function get() {
+		return _requests.getInputDeviceEndpoint;
+	}
+});
+
+var _responses = require("./controllers/responses");
+
+Object.defineProperty(exports, "sendUnauthorized", {
+	enumerable: true,
+	get: function get() {
+		return _responses.sendUnauthorized;
+	}
+});
+Object.defineProperty(exports, "sendFailure", {
+	enumerable: true,
+	get: function get() {
+		return _responses.sendFailure;
+	}
+});
+Object.defineProperty(exports, "prepSuccess", {
+	enumerable: true,
+	get: function get() {
+		return _responses.prepSuccess;
+	}
+});
+Object.defineProperty(exports, "sendSuccess", {
+	enumerable: true,
+	get: function get() {
+		return _responses.sendSuccess;
+	}
+});
+Object.defineProperty(exports, "handleRobots", {
+	enumerable: true,
+	get: function get() {
+		return _responses.handleRobots;
+	}
+});
+Object.defineProperty(exports, "handleSuccess", {
+	enumerable: true,
+	get: function get() {
+		return _responses.handleSuccess;
+	}
+});
+Object.defineProperty(exports, "handleFailure", {
+	enumerable: true,
+	get: function get() {
+		return _responses.handleFailure;
+	}
+});
+
+var _timestamps = require("./controllers/timestamps");
+
+Object.defineProperty(exports, "timerStart", {
+	enumerable: true,
+	get: function get() {
+		return _timestamps.start;
+	}
+});
+Object.defineProperty(exports, "timerStop", {
+	enumerable: true,
+	get: function get() {
+		return _timestamps.stop;
+	}
+});
+Object.defineProperty(exports, "now", {
+	enumerable: true,
+	get: function get() {
+		return _timestamps.now;
+	}
+});
+Object.defineProperty(exports, "minutesFromNow", {
+	enumerable: true,
+	get: function get() {
+		return _timestamps.minutesFromNow;
+	}
+});
+
+var _transforms = require("./controllers/transforms");
+
+Object.defineProperty(exports, "safeStringify", {
+	enumerable: true,
+	get: function get() {
+		return _transforms.safeStringify;
+	}
+});
+Object.defineProperty(exports, "safeParse", {
+	enumerable: true,
+	get: function get() {
+		return _transforms.safeParse;
+	}
+});
+Object.defineProperty(exports, "htmlToText", {
+	enumerable: true,
+	get: function get() {
+		return _transforms.htmlToText;
+	}
+});
+Object.defineProperty(exports, "stripTrailingSlash", {
+	enumerable: true,
+	get: function get() {
+		return _transforms.stripTrailingSlash;
+	}
+});
 // PROTOTYPES
 // =============================================================================
 // extend the prototypes appropriately
 require("./prototypes");
 
-// MOST DEPENDENCIES
+// EXPORTS
 // =============================================================================
-var errors = require("./controllers/errors");
-var requests = require("./controllers/requests");
-var responses = require("./controllers/responses");
-var timestamps = require("./controllers/timestamps");
-var transforms = require("./controllers/transforms");
-
-/*
-* CONSTRUCTOR METHOD
-* function Foo(){ // set some variables up }
-*/
-
-function Main() {}
-
-/*
-* PUBLIC PROPERTIES
-* this.publicBar = foo;
-*/
-
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
-
-// ERRORS
-// =============================================================================
-// construct an Error
-Main.prototype.makeError = errors.makeError;
-// ensure properly formatted error
-Main.prototype.formatError = errors.formatError;
-// mongoose error handling
-Main.prototype.mongooseErrorHandler = errors.mongooseErrorHandler;
-
-// REQUESTS
-// =============================================================================
-// needed for routes that receive from AWS
-Main.prototype.getRawBody = requests.getRawBody;
-// needed for most routes
-Main.prototype.standardizeInput = requests.standardizeInput;
-/*
-// get device hints from user agent
-Main.prototype.getDeviceHints = requests.getDeviceHints;
-// get term hints
-Main.prototype.getTermHints = requests.getTermHints;
-// device input hints
-Main.prototype.getInputDeviceHints = requests.getInputDeviceHints;
-// device input data
-Main.prototype.getInputDeviceData = requests.getInputDeviceData;
-// device input send
-Main.prototype.getInputDeviceSend = requests.getInputDeviceSend;
-// device input endpoint
-Main.prototype.getInputDeviceEndpoint = requests.getInputDeviceEndpoint;
-*/
-// feed input detail
-Main.prototype.getInputFeedDetail = requests.getInputFeedDetail;
-// feed input search
-Main.prototype.getInputFeedSearch = requests.getInputFeedSearch;
-/*
-// system input
-Main.prototype.getInputSystem = requests.getInputSystem;
-// admin input
-Main.prototype.getInputAdmin = requests.getInputAdmin;
-// admin input delete
-Main.prototype.getInputAdminDelete = requests.getInputAdminDelete;
-// user input
-Main.prototype.getInputUser = requests.getInputUser;
-// user input subscribe
-Main.prototype.getInputUserSubscribe = requests.getInputUserSubscribe;
-// user input unsubscribe
-Main.prototype.getInputUserUnsubscribe = requests.getInputUserUnsubscribe;
-// user input endpoint
-Main.prototype.getInputUserEndpoint = requests.getInputUserEndpoint;
-*/
-
-// RESPONSES
-// =============================================================================
-// the user is not authorized!
-Main.prototype.sendUnauthorized = responses.sendUnauthorized;
-// the operation failed in some way, send a responses
-Main.prototype.sendFailure = responses.sendFailure;
-// the operation succeeded, prepare a successful responses
-Main.prototype.prepSuccess = responses.prepSuccess;
-// the operation succeeded, send a responses
-Main.prototype.sendSuccess = responses.sendSuccess;
-// disallow search engine crawlers
-Main.prototype.handleRobots = responses.handleRobots;
-// middleware for sending success messages
-Main.prototype.handleSuccess = responses.handleSuccess;
-// middleware for sending failure messages
-Main.prototype.handleFailure = responses.handleFailure;
-
-// TIMESTAMPS
-// =============================================================================
-// time a given function
-Main.prototype.timerStart = timestamps.start;
-Main.prototype.timerStop = timestamps.stop;
-// manipulate a date
-Main.prototype.now = timestamps.now;
-Main.prototype.minutesFromNow = timestamps.minutesFromNow;
-
-// TRANSFORMS
-// =============================================================================
-// stringify
-Main.prototype.safeStringify = transforms.safeStringify;
-// parse
-Main.prototype.safeParse = transforms.safeParse;
-// strip html
-Main.prototype.htmlToText = transforms.htmlToText;
-// delete trailing slash from the end of a string
-Main.prototype.stripTrailingSlash = transforms.stripTrailingSlash;
-
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
-
-module.exports = new Main();
+// ERRORS -------------------------------

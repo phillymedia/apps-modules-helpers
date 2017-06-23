@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.getInputDelete = exports.getInput = undefined;
+
 var _lodash = require("lodash");
 
 /**
@@ -104,12 +109,8 @@ function getInputDelete(req, res, next) {
 	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	getInput: getInput,
-	getInputDelete: getInputDelete
-};
+exports.getInput = getInput;
+exports.getInputDelete = getInputDelete;

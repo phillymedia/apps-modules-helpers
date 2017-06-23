@@ -1,40 +1,21 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.getRawBody = exports.standardizeInput = undefined;
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- * request module
- * Hopefully reusable class of functions.
- */
-/* eslint-disable */
+var _config = require("../../config");
 
-// MOST DEPENDENCIES
+var _errors = require("../errors");
+
+var _transforms = require("../transforms");
+
+// METHODS
 // =============================================================================
-// config
-var conf = require("../../config");
-// third-party libraries
-
-// sibling modules
-var errors = require("../errors");
-var transforms = require("../transforms");
-
-// CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
-
-// PARSE INPUT
-// =============================================================================
+// PRIVATE -------------------------------
 
 /**
  * Peel off input from params, body, query, and raw body.
@@ -43,6 +24,11 @@ var _debug = conf.debug; // eslint-disable-line no-unused-vars
  * @param {object} req
  * @return {object}
  */
+
+// sibling modules
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 function buildInput(req) {
 	// set up variables
 	var input = {};
@@ -50,11 +36,11 @@ function buildInput(req) {
 	// if everything else is empty but rawBody exists
 	if ((0, _lodash.isEmpty)(req.params) && (0, _lodash.isEmpty)(req.body) && (0, _lodash.isEmpty)(req.query) && req.rawBody) {
 		// log, if debugging
-		if (_debug) {
+		if (_config.debug) {
 			console.log("Using raw body.");
 		}
 		// safely parse the raw body
-		loopable = transforms.safeParse(req.rawBody);
+		loopable = (0, _transforms.safeParse)(req.rawBody);
 		// check if error
 		if ((0, _lodash.isError)(loopable)) {
 			return loopable;
@@ -74,10 +60,10 @@ function buildInput(req) {
 	// loop through input
 	(0, _lodash.forEach)(loopable, function (currInput) {
 		// get input
-		currInput = transforms.safeParse(currInput);
+		currInput = (0, _transforms.safeParse)(currInput);
 		// error?
 		if ((0, _lodash.isError)(currInput)) {
-			throw errors.makeError("InvalidRequest", "Invalid request input:" + transforms.safeStringify(input), "Helpers buildInput > transforms.safeParse", 400);
+			throw (0, _errors.makeError)("InvalidRequest", "Invalid request input:" + (0, _transforms.safeStringify)(input), "Helpers buildInput > safeParse", 400);
 		}
 		// make sure it has content
 		if (inputHasContent(currInput)) {
@@ -101,20 +87,25 @@ function buildInput(req) {
  * @param {object} input
  * @return {boolean}
  */
+
+// APP -------------------------------
 function inputHasContent(input) {
 	// array/object? and not empty?
 	return input && (0, _lodash.isObject)(input) && !(0, _lodash.isEmpty)(input);
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
-// needed for most routes
+/**
+ * Needed for most routes.
+ *
+ * @method standardizeInput
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
 function standardizeInput(req, res, next) {
-	// attempt _buildInput
+	// attempt buildInput
 	var input = (0, _lodash.attempt)(buildInput, req);
 	// an error has occurred while parsing
 	if ((0, _lodash.isError)(input)) {
@@ -122,7 +113,7 @@ function standardizeInput(req, res, next) {
 	}
 	// no input at all
 	if (!input) {
-		return next(errors.makeError("NoContent", "Empty request.", "Helpers standardizeInput", 400));
+		return next((0, _errors.makeError)("NoContent", "Empty request.", "Helpers standardizeInput", 400));
 	}
 	// otherwise, set to req.input
 	req.input = input;
@@ -158,12 +149,8 @@ function getRawBody(req, res, next) {
 	});
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	standardizeInput: standardizeInput,
-	getRawBody: getRawBody
-};
+exports.standardizeInput = standardizeInput;
+exports.getRawBody = getRawBody;

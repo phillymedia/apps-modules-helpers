@@ -1,5 +1,9 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _lodash = require("lodash");
 
 /**
@@ -65,11 +69,7 @@ function getInput(req, res, next) {
 	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	getInput: getInput
-};
+exports.default = getInput;

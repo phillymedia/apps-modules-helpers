@@ -1,44 +1,36 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _lodash = require("lodash");
 
-/**
- * PHILLLY HELPERS
- * requests/notifications/publish
- * Hopefully reusable class of functions.
- */
+var _config = require("../../../config");
 
-// MOST DEPENDENCIES
-// =============================================================================
-// config
-var conf = require("../../../config");
-// third-party libraries
-
-// sibling modules
-var errors = require("../../errors");
-// const transforms = require("COMP/transforms");
+var _errors = require("../../errors");
 
 // CONFIG -------------------------------
-var _debug = conf.debug; // eslint-disable-line no-unused-vars
-var _hints = conf.sns.hints;
 
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
+// APP -------------------------------
+var _hints = _config.sns.hints;
 
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
+// METHODS
+// =============================================================================
+// PRIVATE -------------------------------
 
 /**
  * Get the inputs from the notifications/publish route.
  *
- * @method getInput
+ * @method getHints
  * @param {string} targetHint
  * @returns {array}
  */
+
+// sibling modules
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
 function getHints(targetHint) {
 	// define variables
 	var termHints = void 0;
@@ -61,11 +53,7 @@ function getHints(targetHint) {
 	}));
 }
 
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
 /**
  * Get the inputs from the feed/search route.
@@ -89,7 +77,7 @@ function getInput(req, res, next) {
 		// eslint-disable-line consistent-return
 		// subject is optional, everything else is not
 		if (!value && key !== "deviceSubject") {
-			return next(errors.makeError("MissingInput", "Missing " + key + " in request input.", "Helpers getInputDeviceSend", 400));
+			return next((0, _errors.makeError)("MissingInput", "Missing " + key + " in request input.", "Helpers getInputDeviceSend", 400));
 		}
 		// special handling for term hint
 		if (key === "termHints") {
@@ -108,11 +96,7 @@ function getInput(req, res, next) {
 	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	getInput: getInput
-};
+exports.default = getInput;

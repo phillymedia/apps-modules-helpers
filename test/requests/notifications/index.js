@@ -1,3 +1,14 @@
+/*
+	router.route("/subscriptions")
+		// global to this route only
+		.all(helpers.standardizeInput)
+		// view subscriptions for device
+		//.get(main.getSubscriptions)
+		// create subscription for device
+		.post(helpers.getInputDeviceHints, helpers.getInputDeviceData, main.subscribe)
+		;
+*/
+
 /* eslint-disable no-unused-expressions */
 
 // dependencies
@@ -16,6 +27,13 @@ const expect = chai.expect;
 const MockExpressRequest = require("mock-express-request");
 const MockExpressReponse = require("mock-express-response");
 
+/*
+export { default as getInput } from "./core";
+export { default as getInputEndpoint } from "./endpoint";
+export { default as getInputPublish } from "./publish";
+export { default as getInputSubscribe } from "./subscribe";
+
+*/
 
 // PRIVATE VARIABLES
 // =============================================================================

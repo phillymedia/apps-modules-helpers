@@ -1,33 +1,14 @@
 "use strict";
 
-/**
- * PHILLLY HELPERS
- * requests/notifications/endpoint
- * Hopefully reusable class of functions.
- */
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
-// MOST DEPENDENCIES
+var _errors = require("../../errors");
+
+// METHODS
 // =============================================================================
-// sibling modules
-var errors = require("../../errors");
-// const transforms = require("COMP/transforms");
-
-
-/*
-* PRIVATE PROPERTIES
-* var _privateBar;
-*/
-
-/*
-* PRIVATE METHODS
-* function _privateBar(){ var self = this; return this.foo; }
-*/
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ var self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// PUBLIC -------------------------------
 
 /**
  * Get the inputs from the notifications/endpoint route.
@@ -45,7 +26,7 @@ function getInput(req, res, next) {
 	endpointHint.token = req.input.deviceToken || "";
 	// make sure one or the other actually has content
 	if (!endpointHint.username && !endpointHint.token) {
-		return next(errors.makeError("NoUsernameOrToken", "Missing both username and token.", "Helpers getInputDeviceEndpoint", 400));
+		return next((0, _errors.makeError)("NoUsernameOrToken", "Missing both username and token.", "Helpers getInputDeviceEndpoint", 400));
 	}
 	// optional device switch setting
 	var deviceSwitch = req.input.deviceSwitch ? "true" : "false";
@@ -56,11 +37,11 @@ function getInput(req, res, next) {
 	return next();
 }
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORTS
+// =============================================================================
 
-module.exports = {
-	getInput: getInput
-};
+// DEPENDENCIES
+// =============================================================================
+// APP -------------------------------
+// sibling modules
+exports.default = getInput;

@@ -1,26 +1,43 @@
 "use strict";
 
-/**
- * PHILLLY HELPERS
- * requests/notifications
- * Hopefully reusable class of functions.
- */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-// MOST DEPENDENCIES
-// =============================================================================
-var core = require("./core");
-var endpoint = require("./endpoint");
-var publish = require("./publish");
-var subscribe = require("./subscribe");
+var _core = require("./core");
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+Object.defineProperty(exports, "getInput", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_core).default;
+  }
+});
 
-module.exports = {
-  getInput: core.getInput,
-  getInputEndpoint: endpoint.getInput,
-  getInputPublish: publish.getInput,
-  getInputSubscribe: subscribe.getInput
-};
+var _endpoint = require("./endpoint");
+
+Object.defineProperty(exports, "getInputEndpoint", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_endpoint).default;
+  }
+});
+
+var _publish = require("./publish");
+
+Object.defineProperty(exports, "getInputPublish", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_publish).default;
+  }
+});
+
+var _subscribe = require("./subscribe");
+
+Object.defineProperty(exports, "getInputSubscribe", {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_subscribe).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
