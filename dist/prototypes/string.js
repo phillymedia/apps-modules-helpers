@@ -2,14 +2,6 @@
 
 var _lodash = require("lodash");
 
-/**
-* PHILLY NOTIFICATIONS APP
-* a sub module of prototypes
-* Contains the string prototype methods.
-**/
-
-// SETUP
-// =============================================================================
 // DEPENDENCIES
 // =============================================================================
 // APP -------------------------------
@@ -19,58 +11,51 @@ var core = require("./core");
 // lodash
 
 
-/*
-* PRIVATE PROPERTIES
-* const _privateBar;
-*/
+// PROPERTIES
+// =============================================================================
+// PRIVATE -------------------------------
 
 // global object
 var newString = {};
 
-/*
-* PRIVATE METHODS
-* function _privateBar(){ const self = this; return this.foo; }
-*/
-
-/*
-* PUBLIC METHODS
-* Foo.prototype.publicBar = function(){ const self = this; return self.foo; }
-* Foo.prototype.publicShell = function(){ return _privateBar.call(this, // any other variables); }
-*/
+// METHODS
+// =============================================================================
+// PUBLIC -------------------------------
 
 /**
-* Transform a string to Title Case.
-*
-* @method pcToTitleCase
-* @return {String} 				Returns the transformed string.
-*/
+ * Transform a string to Title Case.
+ *
+ * @method pcToTitleCase
+ * @return {string} 				Returns the transformed string.
+ */
 function pcToTitleCase() {
 	var str = this;
 	return (0, _lodash.startCase)((0, _lodash.toLower)(str));
 }
 
 /**
-* Truncate a string.
-*
-* @method pcTruncate
-* @param {Int} len					String goal length.
-* @param {Bool} useWordBoundary		Whether to break words or not.
-* @return {String} 					Returns the transformed string.
-*/
-function pcTruncate(len, useWordBoundary) {
+ * Truncate a string.
+ *
+ * @method pcTruncate
+ * @param {integer} length				String goal length.
+ * @param {boolean} useWordBoundary		(option) Whether to break words or not.
+ * @return {string}						Returns the transformed string.
+ */
+function pcTruncate() {
+	var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20;
+	var useWordBoundary = arguments[1];
+
+	// grab string
 	var str = this;
 	if (!str) {
-		throw new Error("No string!");
+		return "";
 	}
+	// set up options
 	var options = {
-		omission: "..."
+		omission: "...",
+		length: length
 	};
-	if (len) {
-		if (!(0, _lodash.isNumber)(len)) {
-			throw new Error("Bad input!");
-		}
-		options.length = len;
-	}
+	// optional word boundary
 	if (useWordBoundary) {
 		options.separator = " ";
 	}
@@ -78,11 +63,11 @@ function pcTruncate(len, useWordBoundary) {
 }
 
 /**
-* Get the byte count of a string.
-*
-* @method pcGetByteCount
-* @return {String} 				Returns the transformed string.
-*/
+ * Get the byte count of a string.
+ *
+ * @method pcGetByteCount
+ * @return {string} 				Returns the transformed string.
+ */
 function pcGetByteCount() {
 	var str = this;
 	var count = 0;
@@ -96,10 +81,8 @@ function pcGetByteCount() {
 	return count;
 }
 
-/*
-* EXPORT THE FINISHED OBJECT
-* module.exports = object;
-*/
+// EXPORTS
+// =============================================================================
 
 // e.g. The Empire State Building
 newString.pcToTitleCase = pcToTitleCase;
