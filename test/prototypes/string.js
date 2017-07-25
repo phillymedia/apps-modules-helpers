@@ -149,7 +149,7 @@ function truncateMatchesWithout() {
  * @return {function}
  */
 function truncateErrors() {
-	expect(testsStrings.truncate.pcTruncate, "bad input").to.throw(Error);
+	expect(testsStrings.truncate.pcTruncate, "").to.not.throw;
 }
 
 /**
@@ -258,8 +258,8 @@ function tests() {
 			});
 		});
 		// errors
-		context("when called with bad arguments", () => {
-			it("throws an error", pcTruncateTest.errors);
+		context("when called with an empty string", () => {
+			it("returns an empty string", pcTruncateTest.errors);
 		});
 		context("when called on an Object", () => {
 			it("does not exist", pcTruncateTest.missing);

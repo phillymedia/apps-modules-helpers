@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-expressions */
 
 // dependencies
+import transforms from "./transforms";
 const errors = require("./errors");
 const responses = require("./responses");
 const requests = require("./requests");
 const timestamps = require("./timestamps");
-const transforms = require("./transforms");
 const prototypes = require("./prototypes");
 
 // errors
