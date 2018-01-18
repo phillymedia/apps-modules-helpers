@@ -1,7 +1,9 @@
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
 
-// dependencies
+// DEPENDENCIES
+// =============================================================================
+
 import { expect } from "chai";
 // just run the app
 import "MAIN";
@@ -13,31 +15,16 @@ const testsNumbers = {
 };
 
 
-// MAIN METHODS
+// METHODS
 // =============================================================================
-// TITLE CASE -------------------------------
-
-/**
- * Test the pcToTitleCase method.
- *
- * @method pcToOrdinalTest
- * @param {function} done
- * @return {function}
- */
-const pcToOrdinalTest = {
-	exists: ordinalExists,
-	type: ordinalType,
-	matches: ordinalMatches,
-	missing: ordinalMissing,
-};
 
 /**
  * Test the pcToOrdinal method - exists.
  *
- * @method ordinalExists
+ * @method exists
  * @return {function}
  */
-function ordinalExists() {
+function exists() {
 	// expect method to exist on the prototype
 	expect(Number).to.respondTo("pcToOrdinal");
 }
@@ -45,32 +32,22 @@ function ordinalExists() {
 /**
  * Test the pcToOrdinal method - type.
  *
- * @method ordinalType
+ * @method type
  * @return {function}
  */
-function ordinalType() {
+function type() {
 	const ordinaled = testsNumbers.ordinal.pcToOrdinal();
 	expect(ordinaled).to.be.a("string");
-}
-
-/**
- * Test the pcToOrdinal method - correct return.
- *
- * @method ordinalMatches
- * @return {function}
- */
-function ordinalMatches() {
-	const ordinaled = testsNumbers.ordinal.pcToOrdinal();
 	expect(ordinaled).to.equal(testsNumbers.ordinaled);
 }
 
 /**
  * Test the pcToOrdinal method - not on the string prototype.
  *
- * @method ordinalMissing
+ * @method missing
  * @return {function}
  */
-function ordinalMissing() {
+function missing() {
 	expect(String).to.not.respondTo("pcToOrdinal");
 }
 
@@ -86,25 +63,20 @@ function ordinalMissing() {
 function tests() {
 	// to ordinal
 	describe("To Ordinal", () => {
-		it("exists on the prototype", pcToOrdinalTest.exists);
+		it("exists on the prototype", exists);
 		// everything going right
 		context("when called on a Number", () => {
-			it("returns a string", pcToOrdinalTest.type);
-			it("returns the output", pcToOrdinalTest.matches);
+			it("returns an appropriate string", type);
 		});
 		// errors
 		context("when called on a String", () => {
-			it("does not exist", pcToOrdinalTest.missing);
+			it("does not exist", missing);
 		});
 	});
 }
 
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORT
+// =============================================================================
 
-module.exports = {
-	tests,
-};
+export default tests;

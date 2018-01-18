@@ -3,15 +3,11 @@
 
 // dependencies
 import { sendUnauthorized } from "MAIN";
-// chai
-import chai from "chai";
-// chai plugins
-chai.use(require("chai-http"));
-// expect method
-const expect = chai.expect;
 // express request/response mocking
-const MockExpressRequest = require("mock-express-request");
-const MockExpressReponse = require("mock-express-response");
+import MockExpressReponse from "mock-express-response";
+import MockExpressRequest from "mock-express-request";
+// chai
+import { expect } from "chai";
 
 
 // MAIN METHODS
@@ -25,13 +21,8 @@ const MockExpressReponse = require("mock-express-response");
  * @return {function}
  */
 function sendUnauthorizedTest() {
-	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-		url: "/anything",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
+	// get mocks
+	const { request, response } = this;
 	// call send unauthorized
 	sendUnauthorized(request, response);
 	// expect response to be 403
@@ -48,6 +39,14 @@ function sendUnauthorizedTest() {
  * @method tests
  */
 function tests() {
+	// mock requests
+	beforeEach(function () {
+		this.request = new MockExpressRequest({
+			method: "GET",
+			url: "/anything",
+		});
+		this.response = new MockExpressReponse();
+	});
 	// make error
 	describe("Send Unauthorized", () => {
 		context("when unauthorized", () => {
@@ -57,11 +56,7 @@ function tests() {
 }
 
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORT
+// =============================================================================
 
-module.exports = {
-	tests,
-};
+export default tests;

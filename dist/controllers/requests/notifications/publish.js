@@ -1,1 +1,102 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var _lodash=require("lodash"),_config=require("../../../config"),_errors=require("../../errors"),_hints=_config.sns.hints;function getHints(targetHint){var termHints,hints=(0,_lodash.filter)(_hints,function(currHint){return currHint.targetHint===targetHint});return(0,_lodash.flatten)((0,_lodash.map)(hints,function(currHint){return termHints=currHint.termHint,(0,_lodash.isString)(termHints)?currHint.termHint:(0,_lodash.map)(termHints,function(hint){return hint+("sportscombo"===targetHint?currHint.osPostfix:"")})}))}function getInput(req,res,next){var input={id:req.input.id,deviceSubject:req.input.subject,deviceMessage:req.input.message,termHints:req.input.target};return(0,_lodash.forOwn)(input,function(value,key){return value||"deviceSubject"===key?void("termHints"===key&&(req.originalTarget=value,value=getHints(value),(0,_lodash.isString)(value)&&(value=[value])),req[key]=value):next((0,_errors.makeError)("MissingInput","Missing "+key+" in request input.","Helpers getInputDeviceSend",400))}),next()}exports.default=getInput;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _lodash = require("lodash");
+
+var _config = require("../../../config");
+
+var _errors = require("../../errors");
+
+// CONFIG -------------------------------
+
+// APP -------------------------------
+var _hints = _config.sns.hints;
+
+// METHODS
+// =============================================================================
+// PRIVATE -------------------------------
+
+/**
+ * Get the inputs from the notifications/publish route.
+ *
+ * @method getHints
+ * @param {string} targetHint
+ * @returns {array}
+ */
+
+// sibling modules
+// DEPENDENCIES
+// =============================================================================
+// THIRD-PARTY -------------------------------
+function getHints(targetHint) {
+	// define variables
+	var termHints = void 0;
+	// get hints array
+	var hints = (0, _lodash.filter)(_hints, function (currHint) {
+		return currHint.targetHint === targetHint;
+	});
+	// return a flat map of terms
+	return (0, _lodash.flatten)((0, _lodash.map)(hints, function (currHint) {
+		termHints = currHint.termHint;
+		// add singular hint
+		if ((0, _lodash.isString)(termHints)) {
+			return currHint.termHint;
+		}
+		// handle arrays
+
+		return (0, _lodash.map)(termHints, function (hint) {
+			return hint + (targetHint === "sportscombo" ? currHint.osPostfix : "");
+		});
+	}));
+}
+
+// PUBLIC -------------------------------
+
+/**
+ * Get the inputs from the feed/search route.
+ *
+ * @method getInput
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ * @returns {function}
+ */
+function getInput(req, res, next) {
+	// grab input from the request input
+	var input = {
+		id: req.input.id,
+		deviceSubject: req.input.subject,
+		deviceMessage: req.input.message,
+		termHints: req.input.target
+	};
+	// loop through, adding to the request
+	(0, _lodash.forOwn)(input, function (value, key) {
+		// eslint-disable-line consistent-return
+		// subject is optional, everything else is not
+		if (!value && key !== "deviceSubject") {
+			return next((0, _errors.makeError)("MissingInput", "Missing " + key + " in request input.", "Helpers getInputDeviceSend", 400));
+		}
+		// special handling for term hint
+		if (key === "termHints") {
+			// save original value to the request
+			req.originalTarget = value;
+			// transform it
+			value = getHints(value);
+			if ((0, _lodash.isString)(value)) {
+				value = [value];
+			}
+		}
+		// add to the request
+		req[key] = value;
+	});
+	// next!
+	return next();
+}
+
+// EXPORTS
+// =============================================================================
+
+exports.default = getInput;

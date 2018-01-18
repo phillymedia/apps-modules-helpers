@@ -83,6 +83,4 @@ function tests() {
 // EXPORT
 // =============================================================================
 
-export default {
-	tests,
-};
+export default tests;

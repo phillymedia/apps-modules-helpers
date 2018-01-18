@@ -3,32 +3,15 @@
 
 // dependencies
 import { handleRobots } from "MAIN";
-// chai
-import chai from "chai";
-// chai plugins
-chai.use(require("chai-http"));
-// expect method
-const expect = chai.expect;
 // express request/response mocking
-const MockExpressRequest = require("mock-express-request");
-const MockExpressReponse = require("mock-express-response");
+import MockExpressReponse from "mock-express-response";
+import MockExpressRequest from "mock-express-request";
+// chai
+import { expect } from "chai";
 
 
-// MAIN METHODS
+// METHODS
 // =============================================================================
-// HANDLE ROBOTS -------------------------------
-
-/**
- * Test the handleRobots method.
- *
- * @method sendSuccessTest
- * @param {function} done
- * @return {function}
- */
-const handleRobotsTest = {
-	// data: done => prepData(done),
-	status: done => robotsStatus(done),
-};
 
 /**
  * Test the prepSuccess method - data.
@@ -39,12 +22,7 @@ const handleRobotsTest = {
  */
 function robotsStatus(done) {
 	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-		url: "/anything",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
+	const { request, response } = this;
 	// call send success
 	handleRobots(request, response);
 	expect(response.statusCode).to.equal(200);
@@ -61,21 +39,24 @@ function robotsStatus(done) {
  * @method tests
  */
 function tests() {
+	beforeEach(function () {
+		this.request = new MockExpressRequest({
+			method: "GET",
+			url: "/anything",
+		});
+		this.response = new MockExpressReponse();
+	});
 	// make error
 	describe("Handle Robots", () => {
 		context("when a robot visits", () => {
 			// it("sendData should have success property", handleRobotsTest.data);
-			it("should return 200", handleRobotsTest.status);
+			it("should return 200", robotsStatus);
 		});
 	});
 }
 
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORT
+// =============================================================================
 
-module.exports = {
-	tests,
-};
+export default tests;

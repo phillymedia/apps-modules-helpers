@@ -1,39 +1,26 @@
 /* eslint-env mocha */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unused-expressions */
 
 // dependencies
 import { sendFailure } from "MAIN";
+// express request/response mocking
+import MockExpressReponse from "mock-express-response";
+import MockExpressRequest from "mock-express-request";
 // chai
 import chai from "chai";
-// chai plugins
+// http plugin
 chai.use(require("chai-http"));
-// expect method
-const expect = chai.expect;
-// express request/response mocking
-const MockExpressRequest = require("mock-express-request");
-const MockExpressReponse = require("mock-express-response");
+// expect
+const { expect } = chai;
+
 
 // an error
 const testError = new Error("A test error!");
 
 
-// MAIN METHODS
+// METHODS
 // =============================================================================
-// SEND FAILURE -------------------------------
-
-/**
- * Test the sendFailure method.
- *
- * @method sendFailureTest
- * @param {function} done
- * @return {function}
- */
-const sendFailureTest = {
-	headers: done => failureHeaders(done),
-	status: done => failureStatus(done),
-	headersError: done => failureHeadersError(done),
-	statusError: done => failureStatusError(done),
-};
 
 /**
  * Test the sendFailure method.
@@ -44,12 +31,7 @@ const sendFailureTest = {
  */
 function failureHeaders(done) {
 	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-		url: "/anything",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
+	const { request, response } = this;
 	// call send success
 	sendFailure(testError, request, response);
 	// proper headers
@@ -67,12 +49,7 @@ function failureHeaders(done) {
  */
 function failureStatus(done) {
 	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-		url: "/anything",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
+	const { request, response } = this;
 	// call send success
 	sendFailure(testError, request, response);
 	// expect response to be 500 (default for errors)
@@ -90,12 +67,7 @@ function failureStatus(done) {
  */
 function failureHeadersError(done) {
 	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-		url: "/anything",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
+	const { request, response } = this;
 	// call send success
 	sendFailure(null, request, response);
 	// headers
@@ -113,12 +85,7 @@ function failureHeadersError(done) {
  */
 function failureStatusError(done) {
 	// mock a request
-	const request = new MockExpressRequest({
-		method: "GET",
-		url: "/anything",
-	});
-	// mock a response
-	const response = new MockExpressReponse();
+	const { request, response } = this;
 	// call send success
 	sendFailure(null, request, response);
 	// expect response to be 501 (means bad error was passed in)
@@ -137,25 +104,28 @@ function failureStatusError(done) {
  * @method tests
  */
 function tests() {
+	beforeEach(function () {
+		this.request = new MockExpressRequest({
+			method: "GET",
+			url: "/anything",
+		});
+		this.response = new MockExpressReponse();
+	});
 	// send failure
 	describe("Send Failure", () => {
 		context("when sending (default) error", () => {
-			it("should return json headers", sendFailureTest.headers);
-			it("should return 500 status", sendFailureTest.status);
+			it("should return json headers", failureHeaders);
+			it("should return 500 status", failureStatus);
 		});
 		context("when no error is sent", () => {
-			it("should return json headers", sendFailureTest.headersError);
-			it("should return 501 status", sendFailureTest.statusError);
+			it("should return json headers", failureHeadersError);
+			it("should return 501 status", failureStatusError);
 		});
 	});
 }
 
 
-/*
-* EXPORT THE FINISHED CLASS
-* module.exports = className;
-*/
+// EXPORT
+// =============================================================================
 
-module.exports = {
-	tests,
-};
+export default tests;

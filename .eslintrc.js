@@ -42,10 +42,6 @@ module.exports = {
 		"import/newline-after-import": "off",
 		// wtf
 		"import/no-dynamic-require": "off",
-		// allow optionalDependencies
-		"import/no-extraneous-dependencies": ["error", {
-			"optionalDependencies": ["test/unit/index.js"]
-		}],
 		"import/first": 0,
 		"import/extensions": ["off", "never"],
 		// tab style

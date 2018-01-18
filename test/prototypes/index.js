@@ -1,7 +1,2 @@
-const string = require("./string");
-const number = require("./number");
-
-module.exports = {
-	string,
-	number,
-};
+export { default as string } from "./string";
+export { default as number } from "./number";

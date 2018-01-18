@@ -3,42 +3,60 @@
 
 // dependencies
 import transforms from "./transforms";
-const errors = require("./errors");
-const responses = require("./responses");
-const requests = require("./requests");
-const timestamps = require("./timestamps");
-const prototypes = require("./prototypes");
+import { makeError, formatError } from "./errors";
+import { string, number } from "./prototypes";
+import { core, feed } from "./requests";
+import { auth, success, failure, robots } from "./responses";
+import { minutesFromNow, now, timerStart, timerStop } from "./timestamps";
 
 // errors
 // describe the error methods
-describe("Errors", errors.tests);
+describe("Errors", () => {
+	describe("Make Error", makeError);
+	describe("Format Error", formatError);
+});
 
 // timestamps
 // describe the timestamp methods
-describe("Timestamps", timestamps.tests);
+describe("Timestamps", () => {
+	describe("Mintes From Now", minutesFromNow);
+	describe("Now", now);
+	describe("Timer Start", timerStart);
+	describe("Timer Stop", timerStop);
+});
 
 // transforms
 // describe the transform methods
-describe("Transforms", transforms.tests);
+describe("Transforms", transforms);
 
 // responses
 describe("Responses", () => {
 	// describe the authorization methods
-	describe("Auth", responses.auth.tests);
+	describe("Auth", auth);
 	// describe the success methods
-	describe("Success", responses.success.tests);
+	describe("Success", success);
 	// describe the failure methods
-	describe("Failure", responses.failure.tests);
+	describe("Failure", failure);
 	// describe the robots method
-	describe("Robots", responses.robots.tests);
+	describe("Robots", robots);
 });
 
 // responses
 describe("Requests", () => {
 	// describe the core methods
-	describe("Core", requests.core.tests);
+	describe("Core", () => {
+		// get raw body
+		describe("Get Raw Body", core.getRawBody);
+		// standardize input
+		describe("Standardize Input", core.standardizeInput);
+	});
 	// describe the feed methods
-	describe("Feed", requests.feed.tests);
+	describe("Feed", () => {
+		// detail
+		describe("Detail", feed.detail);
+		// search
+		describe("Search", feed.search);
+	});
 	// describe the notifications methods
 	// describe("Notifications", requests.notifications.tests);
 	// describe the system methods
@@ -50,7 +68,11 @@ describe("Requests", () => {
 // prototypes
 describe("Prototypes", () => {
 	// describe the string methods
-	describe("String", prototypes.string.tests);
+	describe("String", () => {
+		describe("Get Byte Count", string.getByteCount);
+		describe("Title Case", string.titleCase);
+		describe("Truncate", string.truncate);
+	});
 	// describe the number methods
-	describe("Number", prototypes.number.tests);
+	describe("Number", number);
 });

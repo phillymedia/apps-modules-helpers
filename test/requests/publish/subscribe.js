@@ -1,21 +1,11 @@
-/*
-	router.route("/subscriptions")
-		// global to this route only
-		.all(standardizeInput)
-		// view subscriptions for device
-		//.get(main.getSubscriptions)
-		// create subscription for device
-		.post(getInputDeviceHints, getInputDeviceSubscribe, subscribe)
-		;
-*/
-
+/* eslint-disable prefer-arrow-callbacks */
 /* eslint-disable no-unused-expressions */
 
 // DEPENDENCIES
 // =============================================================================
 // MOCKED METHODS -------------------------------
-import conf from "APP/config";
-import { stub } from "sinon";
+// import conf from "APP/config";
+// import { stub } from "sinon";
 // MOCKED CALLBACKS -------------------------------
 // import mocked from "./mocked";
 // const mockedCallbacks = mocked.callbacks;
@@ -31,24 +21,20 @@ import {
 	getInputDeviceSubscribe,
 } from "MAIN";
 // chai
-import chai from "chai";
-// chai plugins
-chai.use(require("chai-http"));
-// expect method
-// const expect = chai.expect;
+import { expect } from "chai";
 // express request/response mocking
 const MockExpressRequest = require("mock-express-request");
 const MockExpressReponse = require("mock-express-response");
 import { sns as _sns } from "APP/config";
-const _hints = _sns.hints;
-const _hint = _hints[0];
+const { _hints } = _sns;
+const [_hint] = _hints;
 
 
 // PROPERTIES
 // =============================================================================
 // PRIVATE -------------------------------
 
-// PRIVATE PROPERTIES
+// PROPERTIES
 // =============================================================================
 
 /**
@@ -100,10 +86,9 @@ const testInputSettings = {
  */
 function noErrors(done) {
 	// get the request
-	// const request = this.badRequest;
-	const request = this.request;
+	const { request, response } = this;
 	// call test method
-	getInputDeviceSubscribe(request, this.response, (err, data) => {
+	getInputDeviceSubscribe(request, response, (err, data) => {
 		console.log(err, data);
 		// expect(request).to.have.property("search").that.equals(testInputSettings.body.search);
 		return done();
