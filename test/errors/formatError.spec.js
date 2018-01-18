@@ -63,12 +63,12 @@ function fake() {
  */
 function tests() {
 	// format error
-    context("when structured correctly", () => {
-        it("formats an error object", working);
-    });
-    context("when missing error", () => {
-        it("creates a 'fake' error", fake);
-    });
+	context("when structured correctly", () => {
+		it("formats an error object", working);
+	});
+	context("when missing error", () => {
+		it("creates a 'fake' error", fake);
+	});
 }
 
 

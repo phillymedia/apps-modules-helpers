@@ -61,14 +61,14 @@ function errorFake() {
  * @method tests
  */
 function tests() {
-    // everything going right
-    context("when structured correctly", () => {
-        it("creates an error object", errorNormal);
-    });
-    // passed bad data
-    context("when missing fields", () => {
-        it("creates a 'fake' error", errorFake);
-    });
+	// everything going right
+	context("when structured correctly", () => {
+		it("creates an error object", errorNormal);
+	});
+	// passed bad data
+	context("when missing fields", () => {
+		it("creates a 'fake' error", errorFake);
+	});
 }
 
 
