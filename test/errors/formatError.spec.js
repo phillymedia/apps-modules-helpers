@@ -58,8 +58,6 @@ function fake() {
 
 /**
  * Errors test methods.
- *
- * @method tests
  */
 function tests() {
 	// format error

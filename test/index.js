@@ -4,6 +4,7 @@
 // dependencies
 import transforms from "./transforms";
 import { makeError, formatError } from "./errors";
+import { info, error, debug } from "./logging";
 import { string, number } from "./prototypes";
 import { core, feed } from "./requests";
 import { auth, success, failure, robots } from "./responses";
@@ -14,6 +15,14 @@ import { minutesFromNow, now, timerStart, timerStop } from "./timestamps";
 describe("Errors", () => {
 	describe("Make Error", makeError);
 	describe("Format Error", formatError);
+});
+
+// logs
+// describe the log methods
+describe("Logging", () => {
+	describe("Info", info);
+	describe("Error", error);
+	describe("Debug", debug);
 });
 
 // timestamps
