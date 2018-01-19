@@ -6,22 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _logging = require("./controllers/logging");
 
-Object.defineProperty(exports, "debug", {
+Object.defineProperty(exports, "log", {
 	enumerable: true,
 	get: function get() {
-		return _logging.debug;
-	}
-});
-Object.defineProperty(exports, "error", {
-	enumerable: true,
-	get: function get() {
-		return _logging.error;
-	}
-});
-Object.defineProperty(exports, "info", {
-	enumerable: true,
-	get: function get() {
-		return _logging.info;
+		return _interopRequireDefault(_logging).default;
 	}
 });
 
@@ -213,6 +201,9 @@ Object.defineProperty(exports, "stripTrailingSlash", {
 		return _transforms.stripTrailingSlash;
 	}
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // PROTOTYPES
 // =============================================================================
 // extend the prototypes appropriately
