@@ -22,8 +22,9 @@ var _hints = _config.sns.hints;
 // =============================================================================
 // THIRD-PARTY -------------------------------
 
-var _sportsNow = _config.sns.cats.sportsNow;
-var _phillyCom = _config.sns.cats.phillyCom;
+var _sns$cats = _config.sns.cats,
+    _sportsNow = _sns$cats.sportsNow,
+    _phillyCom = _sns$cats.phillyCom;
 
 // METHODS
 // =============================================================================
@@ -37,6 +38,7 @@ var _phillyCom = _config.sns.cats.phillyCom;
  * @param {function} next
  * @returns {function}
  */
+
 function getHints(userAgent, subHints, unsubHints) {
   var isSportsNow = false;
   var isPhillyCom = false; // eslint-disable-line no-unused-vars
@@ -148,7 +150,7 @@ function getInput(req, res, next) {
         subHint = [];
         unsubHint = [];
         // add true values to subscribe array, false values to unsubscribe array
-        (0, _lodash.forEach)(req.input.topic, function (value, key) {
+        (0, _lodash.forEach)(_hints, function (value, key) {
           if (req.input.topic[key]) {
             subHint.push(key);
           } else {
