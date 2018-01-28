@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 // this module
 var Main = {};
@@ -9,10 +9,10 @@ var Main = {};
 // clickability -------------------------------
 Main.clickability = {};
 Main.clickability.errors = {
-	badCredentials: "PERMISSION_DENIED",
-	duplicateUser: "DUPLICATE_VALUE",
-	incomplete: "MISSING_VALUE",
-	noResults: "ITEM_NOT_FOUND"
+  badCredentials: "PERMISSION_DENIED",
+  duplicateUser: "DUPLICATE_VALUE",
+  incomplete: "MISSING_VALUE",
+  noResults: "ITEM_NOT_FOUND"
 };
 
 // EXPORT

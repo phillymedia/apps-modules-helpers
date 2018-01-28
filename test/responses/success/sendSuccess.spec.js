@@ -21,34 +21,32 @@ const { expect } = chai;
 /**
  * Test the sendSuccess method.
  *
- * @method sendSuccessTest
  * @param {function} done
  * @return {function}
  */
 function successHeaders(done) {
-	// mock a request
-	const { request, response } = this;
-	// call send success
-	sendSuccess(request, response);
-	// console.log(response);
-	expect(response).to.have.header("content-type", /json/);
-	done();
+  // mock a request
+  const { request, response } = this;
+  // call send success
+  sendSuccess(request, response);
+  // console.log(response);
+  expect(response).to.have.header("content-type", /json/);
+  done();
 }
 
 /**
  * Test the sendSuccess method.
  *
- * @method sendSuccessTest
  * @param {function} done
  * @return {function}
  */
 function successStatus(done) {
-	// mock a request
-	const { request, response } = this;
-	// call send success
-	sendSuccess(request, response);
-	expect(response.statusCode).to.equal(200);
-	done();
+  // mock a request
+  const { request, response } = this;
+  // call send success
+  sendSuccess(request, response);
+  expect(response.statusCode).to.equal(200);
+  done();
 }
 
 
@@ -58,23 +56,22 @@ function successStatus(done) {
 /**
  * Errors test methods.
  *
- * @method tests
  */
 function tests() {
-	beforeEach(function () {
-		this.request = new MockExpressRequest({
-			method: "GET",
-			url: "/anything",
-		});
-		this.response = new MockExpressReponse();
-	});
-	// send success
-	describe("Send Success", () => {
-		context("when no data sent data", () => {
-			it("should have correct headers", successHeaders);
-			it("should return 200", successStatus);
-		});
-	});
+  beforeEach(function () {
+    this.request = new MockExpressRequest({
+      method: "GET",
+      url: "/anything",
+    });
+    this.response = new MockExpressReponse();
+  });
+  // send success
+  describe("Send Success", () => {
+    context("when no data sent data", () => {
+      it("should have correct headers", successHeaders);
+      it("should return 200", successStatus);
+    });
+  });
 }
 
 

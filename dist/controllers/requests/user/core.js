@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _lodash = require("lodash");
@@ -15,7 +15,6 @@ var _errors = require("../../errors");
 /**
  * Get the inputs from the user route.
  *
- * @method getInput
  * @param {object} req
  * @param {object} res
  * @param {function} next
@@ -25,19 +24,19 @@ var _errors = require("../../errors");
 // =============================================================================
 // THIRD-PARTY -------------------------------
 function getInput(req, res, next) {
-	// grab from the request
-	var _ref = req.input || req,
-	    user = _ref.user;
-	// error if missing
+  // grab from the request
+  var _ref = req.input || req,
+      user = _ref.user;
+  // error if missing
 
 
-	if (!user || !(0, _lodash.isString)(user)) {
-		return next((0, _errors.makeError)("NoUser", "Missing or invalid user.", "Helpers getInputUser", 400));
-	}
-	// set to request
-	req.user = user;
-	// next!
-	return next();
+  if (!user || !(0, _lodash.isString)(user)) {
+    return next((0, _errors.makeError)("NoUser", "Missing or invalid user.", "Helpers getInputUser", 400));
+  }
+  // set to request
+  req.user = user;
+  // next!
+  return next();
 }
 
 // EXPORTS

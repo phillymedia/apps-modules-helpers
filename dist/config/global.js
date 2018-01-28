@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _lodash = require("lodash");
@@ -24,9 +24,9 @@ var Main = {};
 // DEPENDENCIES
 // =============================================================================
 (0, _lodash.forEach)([_clicka2.default, _sns2.default], function (settings) {
-	return (0, _lodash.forEach)(settings, function (setting, key) {
-		Main[key] = setting;
-	});
+  return (0, _lodash.forEach)(settings, function (setting, key) {
+    return Main[key] = setting;
+  });
 });
 
 // EXPORT

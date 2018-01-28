@@ -25,11 +25,11 @@ var newString = {};
 /**
  * Transform a string to Title Case.
  *
- * @return {string} 				Returns the transformed string.
+ * @return {string} - Returns the transformed string.
  */
 function pcToTitleCase() {
-	var str = this;
-	return (0, _lodash.startCase)((0, _lodash.toLower)(str));
+  var str = this;
+  return (0, _lodash.startCase)((0, _lodash.toLower)(str));
 }
 
 /**
@@ -40,24 +40,24 @@ function pcToTitleCase() {
  * @returns {string}
  */
 function pcTruncate() {
-	var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20;
-	var useWordBoundary = arguments[1];
+  var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20;
+  var useWordBoundary = arguments[1];
 
-	// grab string
-	var str = this;
-	if (!str) {
-		return "";
-	}
-	// set up options
-	var options = {
-		omission: "...",
-		length: length
-	};
-	// optional word boundary
-	if (useWordBoundary) {
-		options.separator = " ";
-	}
-	return (0, _lodash.truncate)(str, options);
+  // grab string
+  var str = this;
+  if (!str) {
+    return "";
+  }
+  // set up options
+  var options = {
+    omission: "...",
+    length: length
+  };
+  // optional word boundary
+  if (useWordBoundary) {
+    options.separator = " ";
+  }
+  return (0, _lodash.truncate)(str, options);
 }
 
 /**
@@ -66,16 +66,16 @@ function pcTruncate() {
  * @return {string} - Returns the transformed string.
  */
 function pcGetByteCount() {
-	var str = this;
-	var count = 0;
-	var partCount = void 0;
-	var stringLength = str.length;
-	str = String(str || "");
-	(0, _lodash.times)(stringLength, function (i) {
-		partCount = encodeURI(str[i]).split("%").length;
-		count += partCount === 1 ? 1 : partCount - 1;
-	});
-	return count;
+  var str = this;
+  var count = 0;
+  var partCount = void 0;
+  var stringLength = str.length;
+  str = String(str || "");
+  (0, _lodash.times)(stringLength, function (i) {
+    partCount = encodeURI(str[i]).split("%").length;
+    count += partCount === 1 ? 1 : partCount - 1;
+  });
+  return count;
 }
 
 // EXPORTS

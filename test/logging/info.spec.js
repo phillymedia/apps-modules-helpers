@@ -25,17 +25,17 @@ const infoLogged = "Info!";
  * Tests log.info() - no errors.
  */
 function noErrors() {
-	// call info
-	expect(log.info()).to.not.throw;
+  // call info
+  expect(log.info()).to.not.throw;
 }
 
 /**
  * Tests log.info() - calls console.log.
  */
 function callsConsole() {
-	// call info
-	log.info(infoLogged);
-	expect(console.log).to.be.called;
+  // call info
+  log.info(infoLogged);
+  expect(console.log).to.be.called;
 }
 
 // TESTS
@@ -45,19 +45,19 @@ function callsConsole() {
  * Errors test methods.
  */
 function tests() {
-	before(function () {
-		// stub out console log
-		stub(log, "info").callsFake(() => {});
-	});
-	after(function () {
-		// restore original value
-		log.info.restore();
-	});
-	// everything going right
-	context("when structured correctly", function () {
-		it("returns no errors", noErrors);
-		it("calls console.info", callsConsole);
-	});
+  before(function () {
+    // stub out console log
+    stub(log, "info").callsFake(() => {});
+  });
+  after(function () {
+    // restore original value
+    log.info.restore();
+  });
+  // everything going right
+  context("when structured correctly", function () {
+    it("returns no errors", noErrors);
+    it("calls console.info", callsConsole);
+  });
 }
 
 

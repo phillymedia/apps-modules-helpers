@@ -17,7 +17,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /**
  * A logger that only prints out in debug mode.
  *
- * @method debug
  * @param {array} args
  */
 function debug() {

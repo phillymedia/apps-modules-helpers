@@ -14,8 +14,8 @@ var _core = require("./core");
 /**
  * Handle successful requests.
  *
- * @param {Object} req 				The original request.
- * @param {Object} res 				The response.
+ * @param {Object} req - The original request.
+ * @param {Object} res - The response.
  */
 function handleSuccess(req, res, next) {
   return (0, _core.sendSuccess)(req, res, next);
@@ -24,8 +24,8 @@ function handleSuccess(req, res, next) {
 /**
  * Handle error requests.
  *
- * @param {Object} req 				The original request.
- * @param {Object} res 				The response.
+ * @param {Object} req - The original request.
+ * @param {Object} res - The response.
  */
 // DEPENDENCIES
 // =============================================================================

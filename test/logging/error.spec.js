@@ -26,17 +26,17 @@ const errorLogged = "Error";
  * Tests log.error() - no errors.
  */
 function noErrors() {
-	// call error
-	expect(log.error()).to.not.throw;
+  // call error
+  expect(log.error()).to.not.throw;
 }
 
 /**
  * Tests log.error() - calls console.error.
  */
 function callsConsole() {
-	// call error
-	log.error(errorLogged);
-	expect(console.error).to.be.called;
+  // call error
+  log.error(errorLogged);
+  expect(console.error).to.be.called;
 }
 
 // TESTS
@@ -46,19 +46,19 @@ function callsConsole() {
  * Errors test methods.
  */
 function tests() {
-	before(function () {
-		// stub out console log
-		stub(log, "error").callsFake(() => {});
-	});
-	after(function () {
-		// restore original value
-		log.error.restore();
-	});
-	// everything going right
-	context("when structured correctly", function () {
-		it("returns no errors", noErrors);
-		it("calls console.error", callsConsole);
-	});
+  before(function () {
+    // stub out console log
+    stub(log, "error").callsFake(() => {});
+  });
+  after(function () {
+    // restore original value
+    log.error.restore();
+  });
+  // everything going right
+  context("when structured correctly", function () {
+    it("returns no errors", noErrors);
+    it("calls console.error", callsConsole);
+  });
 }
 
 

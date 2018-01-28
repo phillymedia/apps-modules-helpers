@@ -16,17 +16,16 @@ import { expect } from "chai";
 /**
  * Test the prepSuccess method - data.
  *
- * @method prepData
  * @param {function} done
  * @return {function}
  */
 function robotsStatus(done) {
-	// mock a request
-	const { request, response } = this;
-	// call send success
-	handleRobots(request, response);
-	expect(response.statusCode).to.equal(200);
-	done();
+  // mock a request
+  const { request, response } = this;
+  // call send success
+  handleRobots(request, response);
+  expect(response.statusCode).to.equal(200);
+  done();
 }
 
 
@@ -36,23 +35,22 @@ function robotsStatus(done) {
 /**
  * Errors test methods.
  *
- * @method tests
  */
 function tests() {
-	beforeEach(function () {
-		this.request = new MockExpressRequest({
-			method: "GET",
-			url: "/anything",
-		});
-		this.response = new MockExpressReponse();
-	});
-	// make error
-	describe("Handle Robots", () => {
-		context("when a robot visits", () => {
-			// it("sendData should have success property", handleRobotsTest.data);
-			it("should return 200", robotsStatus);
-		});
-	});
+  beforeEach(function () {
+    this.request = new MockExpressRequest({
+      method: "GET",
+      url: "/anything",
+    });
+    this.response = new MockExpressReponse();
+  });
+  // make error
+  describe("Handle Robots", () => {
+    context("when a robot visits", () => {
+      // it("sendData should have success property", handleRobotsTest.data);
+      it("should return 200", robotsStatus);
+    });
+  });
 }
 
 

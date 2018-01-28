@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _lodash = require("lodash");
@@ -15,7 +15,6 @@ var _errors = require("../../errors");
 /**
  * Get the inputs from the feed/search route.
  *
- * @method getInput
  * @param {object} req
  * @param {object} res
  * @param {function} next
@@ -26,33 +25,33 @@ var _errors = require("../../errors");
 // =============================================================================
 // THIRD-PARTY -------------------------------
 function getInput(req, res, next) {
-	// grab input from the request input
-	var subscriber = req.input.subscriber;
-	// if no parameter, abort!
+  // grab input from the request input
+  var subscriber = req.input.subscriber;
+  // if no parameter, abort!
 
-	if (!subscriber || (0, _lodash.isObject)(subscriber) && (0, _lodash.isEmpty)(subscriber)) {
-		return next((0, _errors.makeError)("MissingParameter", "No subscriber specified.", "helpers -> getInput", 400));
-	}
-	// username always required
-	if (!subscriber.email) {
-		return next((0, _errors.makeError)("MissingParameter", "Email required.", "helpers -> getInput", 400));
-	}
-	// password always required
-	if (!subscriber.password) {
-		return next((0, _errors.makeError)("MissingParameter", "Password required.", "helpers -> getInput", 400));
-	}
-	// save the parameter to request
-	req.subscriber = subscriber;
-	// email address is required
-	req.email = subscriber.email;
-	// grab username (optional)
-	if (subscriber.username) {
-		req.username = subscriber.username;
-	}
-	// and also password
-	req.password = subscriber.password;
-	// continue processing
-	return next();
+  if (!subscriber || (0, _lodash.isObject)(subscriber) && (0, _lodash.isEmpty)(subscriber)) {
+    return next((0, _errors.makeError)("MissingParameter", "No subscriber specified.", "helpers -> getInput", 400));
+  }
+  // username always required
+  if (!subscriber.email) {
+    return next((0, _errors.makeError)("MissingParameter", "Email required.", "helpers -> getInput", 400));
+  }
+  // password always required
+  if (!subscriber.password) {
+    return next((0, _errors.makeError)("MissingParameter", "Password required.", "helpers -> getInput", 400));
+  }
+  // save the parameter to request
+  req.subscriber = subscriber;
+  // email address is required
+  req.email = subscriber.email;
+  // grab username (optional)
+  if (subscriber.username) {
+    req.username = subscriber.username;
+  }
+  // and also password
+  req.password = subscriber.password;
+  // continue processing
+  return next();
 }
 
 // EXPORTS

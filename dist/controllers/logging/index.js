@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _debug = require("./debug");
@@ -21,8 +21,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // EXPORTS
 // =============================================================================
 exports.default = {
-	info: _info2.default,
-	debug: _debug2.default,
-	error: _error2.default
+  info: _info2.default,
+  debug: _debug2.default,
+  error: _error2.default
 }; // DEPENDENCIES
 // =============================================================================

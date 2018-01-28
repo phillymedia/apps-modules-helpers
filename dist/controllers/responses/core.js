@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.sendSuccess = exports.prepSuccess = exports.sendFailure = exports.sendUnauthorized = undefined;
 
@@ -22,18 +22,17 @@ var _transforms = require("../transforms");
 /**
  * Set headers if they haven't already been sent.
  *
- * @method setHeaders
  * @param {object} res
  * @param {string} contentType
  */
 
 // APP -------------------------------
 function setHeaders(res) {
-	var contentType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "application/json";
+  var contentType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "application/json";
 
-	if (!res.headersSent) {
-		res.setHeader("Content-Type", contentType);
-	}
+  if (!res.headersSent) {
+    res.setHeader("Content-Type", contentType);
+  }
 }
 
 // PUBLIC -------------------------------
@@ -50,10 +49,10 @@ function setHeaders(res) {
 // =============================================================================
 // THIRD-PARTY -------------------------------
 function sendUnauthorized(req, res) {
-	setHeaders(res);
-	res.status(403);
-	res.send("Forbidden");
-	res.end();
+  setHeaders(res);
+  res.status(403);
+  res.send("Forbidden");
+  res.end();
 }
 
 /**
@@ -64,30 +63,30 @@ function sendUnauthorized(req, res) {
  * @param {Object} res - The response.
  */
 function sendFailure(err, req, res) {
-	// save the server response
-	var savedRes = res;
-	// ensure properly formatted error
-	err = (0, _errors.formatError)(err, savedRes);
-	// stringify input
-	var input = (0, _transforms.safeStringify)({
-		error: err.code,
-		message: err.message,
-		surfaceMessage: err.surfaceMessage
-	});
-	// this will either be a nice object, or a new error
-	if ((0, _lodash.isError)(input)) {
-		_logging.log.error("Could not stringify original error!", input.stack);
-		input = (0, _transforms.safeStringify)({
-			error: input.code,
-			message: input.message,
-			surfaceMessage: false
-		});
-	}
-	// send error
-	setHeaders(res);
-	res.status(err.statusCode);
-	res.send(input);
-	res.end();
+  // save the server response
+  var savedRes = res;
+  // ensure properly formatted error
+  err = (0, _errors.formatError)(err, savedRes);
+  // stringify input
+  var input = (0, _transforms.safeStringify)({
+    error: err.code,
+    message: err.message,
+    surfaceMessage: err.surfaceMessage
+  });
+  // this will either be a nice object, or a new error
+  if ((0, _lodash.isError)(input)) {
+    _logging.log.error("Could not stringify original error!", input.stack);
+    input = (0, _transforms.safeStringify)({
+      error: input.code,
+      message: input.message,
+      surfaceMessage: false
+    });
+  }
+  // send error
+  setHeaders(res);
+  res.status(err.statusCode);
+  res.send(input);
+  res.end();
 }
 
 /**
@@ -98,12 +97,12 @@ function sendFailure(err, req, res) {
 * @return {Function}
 */
 function prepSuccess(req, res, next) {
-	// grab sendData
-	var sentData = res.sendData;
-	// set up the data
-	res.sendData = { success: true, data: sentData };
-	// next!
-	return next();
+  // grab sendData
+  var sentData = res.sendData;
+  // set up the data
+  res.sendData = { success: true, data: sentData };
+  // next!
+  return next();
 }
 
 /**
@@ -113,22 +112,22 @@ function prepSuccess(req, res, next) {
 * @param {Object} sendData - The data.
 */
 function sendSuccess(req, res) {
-	// eslint-disable-line consistent-return
-	// res.sendData = { data: "some kind of data" };
-	if (_config.debug) {
-		_logging.log.info("Success!", "sent data:", res.sendData);
-	}
-	var input = (0, _transforms.safeStringify)(res.sendData);
-	// unset(res, "sendData");
-	if ((0, _lodash.isError)(input)) {
-		_logging.log.error("Could not send success!", input.stack);
-		return sendFailure(input, req, res);
-	}
-	// send success
-	setHeaders(res);
-	res.status(200);
-	res.send(input);
-	res.end();
+  // eslint-disable-line consistent-return
+  // res.sendData = { data: "some kind of data" };
+  if (_config.debug) {
+    _logging.log.info("Success!", "sent data:", res.sendData);
+  }
+  var input = (0, _transforms.safeStringify)(res.sendData);
+  // unset(res, "sendData");
+  if ((0, _lodash.isError)(input)) {
+    _logging.log.error("Could not send success!", input.stack);
+    return sendFailure(input, req, res);
+  }
+  // send success
+  setHeaders(res);
+  res.status(200);
+  res.send(input);
+  res.end();
 }
 
 // EXPORTS

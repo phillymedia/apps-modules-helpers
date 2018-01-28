@@ -13,7 +13,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /**
  * A wrapper for console.info.
  *
- * @method info
  * @param {array} args
  */
 function info() {

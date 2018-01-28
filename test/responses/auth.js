@@ -17,16 +17,15 @@ import { expect } from "chai";
 /**
  * Test the sendUnauthorized method.
  *
- * @method sendUnauthorizedTest
  * @return {function}
  */
 function sendUnauthorizedTest() {
-	// get mocks
-	const { request, response } = this;
-	// call send unauthorized
-	sendUnauthorized(request, response);
-	// expect response to be 403
-	expect(response.statusCode).to.equal(403);
+  // get mocks
+  const { request, response } = this;
+  // call send unauthorized
+  sendUnauthorized(request, response);
+  // expect response to be 403
+  expect(response.statusCode).to.equal(403);
 }
 
 
@@ -36,23 +35,22 @@ function sendUnauthorizedTest() {
 /**
  * Errors test methods.
  *
- * @method tests
  */
 function tests() {
-	// mock requests
-	beforeEach(function () {
-		this.request = new MockExpressRequest({
-			method: "GET",
-			url: "/anything",
-		});
-		this.response = new MockExpressReponse();
-	});
-	// make error
-	describe("Send Unauthorized", () => {
-		context("when unauthorized", () => {
-			it("should return 403 status", sendUnauthorizedTest);
-		});
-	});
+  // mock requests
+  beforeEach(function () {
+    this.request = new MockExpressRequest({
+      method: "GET",
+      url: "/anything",
+    });
+    this.response = new MockExpressReponse();
+  });
+  // make error
+  describe("Send Unauthorized", () => {
+    context("when unauthorized", () => {
+      it("should return 403 status", sendUnauthorizedTest);
+    });
+  });
 }
 
 

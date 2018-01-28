@@ -7,7 +7,7 @@
 import { expect } from "chai";
 // methods to test
 const {
-	now,
+  now,
 } = require("MAIN");
 
 
@@ -18,21 +18,20 @@ const {
  * Test the now method - is a date.
  */
 function nowType() {
-	// get the now()
-	const currNow = now();
-	// expect to be a date
-	expect(currNow).to.be.a("date");
+  // get the now()
+  const currNow = now();
+  // expect to be a date
+  expect(currNow).to.be.a("date");
 }
 
 /**
  * Test the now method - no errors.
  *
- * @method nowNoErrors
  * @return {function}
  */
 function nowNoErrors() {
-	// expect description to match
-	expect(now).to.not.throw(Error);
+  // expect description to match
+  expect(now).to.not.throw(Error);
 }
 
 
@@ -42,11 +41,10 @@ function nowNoErrors() {
 /**
  * Errors test methods.
  *
- * @method tests
  */
 function tests() {
-	it("does not error", nowNoErrors);
-	it("returns a date", nowType);
+  it("does not error", nowNoErrors);
+  it("returns a date", nowType);
 }
 
 

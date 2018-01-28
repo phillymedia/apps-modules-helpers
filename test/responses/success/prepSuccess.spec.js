@@ -21,37 +21,35 @@ const { expect } = chai;
 /**
  * Test the prepSuccess method - data.
  *
- * @method prepData
  * @param {function} done
  * @return {function}
  */
 function prepData(done) {
-	// mock a request
-	const { request, response } = this;
-	// call send success
-	prepSuccess(request, response, (err) => {
-		expect(err).to.be.undefined;
-		expect(response.sendData).to.have.property("success").that.is.true;
-		done();
-	});
+  // mock a request
+  const { request, response } = this;
+  // call send success
+  prepSuccess(request, response, (err) => {
+    expect(err).to.be.undefined;
+    expect(response.sendData).to.have.property("success").that.is.true;
+    done();
+  });
 }
 
 /**
  * Test the prepSuccess method - status.
  *
- * @method prepStatus
  * @param {function} done
  * @return {function}
  */
 function prepStatus(done) {
-	// mock a request
-	const { request, response } = this;
-	// call send success
-	prepSuccess(request, response, (err) => {
-		expect(err).to.be.undefined;
-		expect(response.statusCode).to.equal(200);
-		done();
-	});
+  // mock a request
+  const { request, response } = this;
+  // call send success
+  prepSuccess(request, response, (err) => {
+    expect(err).to.be.undefined;
+    expect(response.statusCode).to.equal(200);
+    done();
+  });
 }
 
 
@@ -61,23 +59,22 @@ function prepStatus(done) {
 /**
  * Errors test methods.
  *
- * @method tests
  */
 function tests() {
-	beforeEach(function () {
-		this.request = new MockExpressRequest({
-			method: "GET",
-			url: "/anything",
-		});
-		this.response = new MockExpressReponse();
-	});
-	// prep success
-	describe("Prep Success", () => {
-		context("when no data sent", () => {
-			it("sendData should have success property", prepData);
-			it("should return 200", prepStatus);
-		});
-	});
+  beforeEach(function () {
+    this.request = new MockExpressRequest({
+      method: "GET",
+      url: "/anything",
+    });
+    this.response = new MockExpressReponse();
+  });
+  // prep success
+  describe("Prep Success", () => {
+    context("when no data sent", () => {
+      it("sendData should have success property", prepData);
+      it("should return 200", prepStatus);
+    });
+  });
 }
 
 

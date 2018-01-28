@@ -8,7 +8,7 @@ import { expect } from "chai";
 // APP -------------------------------
 // methods to test
 import {
-	safeStringify,
+  safeStringify,
 } from "MAIN";
 
 
@@ -16,7 +16,7 @@ import {
 // =============================================================================
 
 const testStringify = {
-	foo: "bar",
+  foo: "bar",
 };
 
 
@@ -27,38 +27,35 @@ const testStringify = {
 /**
  * Test the safeStringify method - makes appropriate calls.
  *
- * @method noErrors
  */
 function noErrors() {
-	// call the test method
-	const stringified = safeStringify(testStringify);
-	// expect correct methods to be called
-	expect(attempt).to.be.called;
-	expect(JSON.stringify).to.be.called;
-	// expect correct type
-	expect(stringified).to.be.a("string");
+  // call the test method
+  const stringified = safeStringify(testStringify);
+  // expect correct methods to be called
+  expect(attempt).to.be.called;
+  expect(JSON.stringify).to.be.called;
+  // expect correct type
+  expect(stringified).to.be.a("string");
 }
 
 /**
  * Test the safeStringify method - no errors.
  *
- * @method stringifyNoErrors
  */
 function noThrow() {
-	// expect no error
-	expect(safeStringify, testStringify).to.not.throw(Error);
+  // expect no error
+  expect(safeStringify, testStringify).to.not.throw(Error);
 }
 
 /**
  * Test the safeStringify method - returns undefined.
  *
- * @method empty
  */
 function empty() {
-	// call the test method
-	const stringified = safeStringify();
-	// expect no error
-	expect(stringified).to.be.undefined;
+  // call the test method
+  const stringified = safeStringify();
+  // expect no error
+  expect(stringified).to.be.undefined;
 }
 
 
@@ -66,7 +63,7 @@ function empty() {
 // =============================================================================
 
 export {
-	empty,
-	noErrors,
-	noThrow,
+  empty,
+  noErrors,
+  noThrow,
 };

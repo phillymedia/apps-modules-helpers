@@ -24,7 +24,6 @@ var htmlEntities = new _htmlEntities.AllHtmlEntities();
 /**
  * Stringify with JSON safely.
  *
- * @method safeStringify
  * @param {object} input - The object to stringify.
  * @return {string}
  */
@@ -38,7 +37,6 @@ function safeStringify(input) {
 /**
  * Parse with JSON safely.
  *
- * @method safeParse
  * @param {string} input - The string to parse.
  * @return {object}
  */
@@ -52,7 +50,6 @@ function safeParse(input) {
 /**
  * Strip html from text.
  *
- * @method htmlToText
  * @param {string} input - The string to strip.
  * @return {string}
  */
@@ -63,7 +60,6 @@ function htmlToText(input) {
 /**
  * Delete trailing slash from the end of a string.
  *
- * @method stripTrailingSlash
  * @param {string} input - The string to strip.
  * @return {string}
  */
