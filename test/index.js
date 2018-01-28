@@ -6,7 +6,7 @@ import transforms from "./transforms";
 import { makeError, formatError } from "./errors";
 import { info, error, debug } from "./logging";
 import { string, number } from "./prototypes";
-import { core, feed } from "./requests";
+import { core, feed, notifications } from "./requests";
 import { auth, success, failure, robots } from "./responses";
 import { minutesFromNow, now, timerStart, timerStop } from "./timestamps";
 
@@ -67,6 +67,10 @@ describe("Requests", () => {
     describe("Search", feed.search);
   });
   // describe the notifications methods
+  describe("Notifications", () => {
+    describe("Publish", notifications.publish);
+    describe("Subscribe", notifications.subscribe);
+  });
   // describe("Notifications", requests.notifications.tests);
   // describe the system methods
   // describe("System", requests.system.tests);

@@ -150,12 +150,13 @@ function getInput(req, res, next) {
         subHint = [];
         unsubHint = [];
         // add true values to subscribe array, false values to unsubscribe array
-        (0, _lodash.forEach)(_hints, function (value, key) {
+        (0, _lodash.forEach)(req.input.topic, function (value, key) {
+          // subscribe
           if (req.input.topic[key]) {
-            subHint.push(key);
-          } else {
-            unsubHint.push(key);
+            return subHint.push(key);
           }
+          // unsubscribe
+          return unsubHint.push(key);
         });
       }
   }

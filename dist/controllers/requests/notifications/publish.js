@@ -75,7 +75,10 @@ function getInput(req, res, next) {
     // eslint-disable-line consistent-return
     // subject is optional, everything else is not
     if (!value && key !== "deviceSubject") {
-      return next((0, _errors.makeError)("MissingInput", "Missing " + key + " in request input.", "Helpers getInputDeviceSend", 400));
+      // make an error
+      next((0, _errors.makeError)("MissingInput", "Missing " + key + " in request input.", "Helpers getInputDeviceSend", 400));
+      // break loop
+      return false;
     }
     // special handling for term hint
     if (key === "termHints") {
