@@ -125,6 +125,7 @@ function soapErrorHandler(err) {
  *
  * @param {string} code - The error's code, e.g. "MissingParameter".
  * @param {string} message - The error's message, e.g. "A parameter is missing".
+ * @param {string} loc - The location, e.g. "Section Name > Function name"
  * @param {string} statusCode - The error's message, e.g. 402.
  * @param {boolean} surfaceMessage - Should we show this to the end user?
  * @return {error}
