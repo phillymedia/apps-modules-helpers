@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.stripTrailingSlash = exports.htmlToText = exports.safeParse = exports.safeStringify = exports.minutesFromNow = exports.now = exports.timerStop = exports.timerStart = exports.handleFailure = exports.handleSuccess = exports.handleRobots = exports.sendSuccess = exports.prepSuccess = exports.sendFailure = exports.sendUnauthorized = exports.getInputDeviceEndpoint = exports.getInputDevicePublish = exports.getInputDeviceSubscribe = exports.getInputDeviceHints = exports.getInputFeedSearch = exports.getInputFeedDetail = exports.getInputClickabilityUpdate = exports.getInputClickabilityRead = exports.getInputClickabilityCreate = exports.standardizeInput = exports.getRawBody = exports.mongooseErrorHandler = exports.formatError = exports.makeError = exports.log = undefined;
 
 var _logging = require("./controllers/logging");
 
@@ -202,7 +203,22 @@ Object.defineProperty(exports, "stripTrailingSlash", {
   }
 });
 
+var _logging2 = _interopRequireDefault(_logging);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// EMERGENCY ERROR HANDLING
+// =============================================================================
+// don't blow up the app, just in case
+process.on("unhandledRejection", function (reason, p) {
+  _logging2.default.error("Unhandled Rejection from Philly Store module at: Promise", p, "reason:", reason);
+});
+// don't blow up the app, just in case
+// DEPENDENCIES
+// =============================================================================
+process.on("uncaughtException", function (err) {
+  _logging2.default.error("Unhandled Exception from Philly Store module:", err);
+});
 
 // PROTOTYPES
 // =============================================================================
