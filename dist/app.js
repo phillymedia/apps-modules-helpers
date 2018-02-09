@@ -211,13 +211,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // =============================================================================
 // don't blow up the app, just in case
 process.on("unhandledRejection", function (reason, p) {
-  _logging2.default.error("Unhandled Rejection from Philly Store module at: Promise", p, "reason:", reason);
+  _logging2.default.error("Unhandled Rejection from Philly Helpers module at: Promise", p, "reason:", reason);
 });
 // don't blow up the app, just in case
 // DEPENDENCIES
 // =============================================================================
 process.on("uncaughtException", function (err) {
-  _logging2.default.error("Unhandled Exception from Philly Store module:", err);
+  _logging2.default.error("Unhandled Exception from Philly Helpers module:", err);
 });
 
 // PROTOTYPES
