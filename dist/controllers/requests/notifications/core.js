@@ -6,21 +6,28 @@ Object.defineProperty(exports, "__esModule", {
 
 var _lodash = require("lodash");
 
+var _logging = require("../../logging");
+
+var _logging2 = _interopRequireDefault(_logging);
+
 var _config = require("../../../config");
 
 var _errors = require("../../errors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // PROPERTIES
 // =============================================================================
 // PRIVATE -------------------------------
 
-// APP -------------------------------
 // config
-var _hints = _config.sns.hints;
-// sibling modules
 // DEPENDENCIES
 // =============================================================================
 // THIRD-PARTY -------------------------------
+var _hints = _config.sns.hints;
+// sibling modules
+
+// APP -------------------------------
 
 var _sns$cats = _config.sns.cats,
     _sportsNow = _sns$cats.sportsNow,
@@ -66,13 +73,26 @@ function getHints(userAgent, subHints, unsubHints) {
     if (userAgent.indexOf(hint.userAgent) === -1) {
       return false;
     }
+    // add the hint that does
+    // logging
+    _logging2.default.debug("App hint " + hint.appHint + " from user agent " + userAgent);
+    // add app hint
     appData.appHint = hint.appHint;
+    // add sub hints, if there were none earlier
     subHints = subHints || hint.termHint;
+    // logging
+    _logging2.default.debug("Sub hints: " + subHints);
+    // mark for sports now
     if (userAgent.indexOf(_sportsNow) === 0) {
+      _logging2.default.debug("Determined: Sports Now!");
       isSportsNow = true;
-    } else if (userAgent.indexOf(_phillyCom) === 0) {
-      isPhillyCom = true;
     }
+    // or philly.com
+    else if (userAgent.indexOf(_phillyCom) === 0) {
+        _logging2.default.debug("Determined: Philly.com");
+        isPhillyCom = true;
+      }
+    // done!
     return true;
   });
 

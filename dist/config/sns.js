@@ -145,6 +145,7 @@ Main.sns.hints = [
   targetHint: inquirercomTargetHintPrefix
 },
 // OLDER SPORTS APPS
+// BASEBALL
 {
   userAgent: baseballUserAgentPrefix + iOSUserAgent,
   appHint: baseballAppHintPrefix + iOSPostfix,
@@ -161,6 +162,7 @@ Main.sns.hints = [
   termHint: baseballTermHintPrefix + GCMPostfix,
   targetHint: baseballTargetHintPrefix
 },
+// BASKETBALL
 // this only exists in the Sports Combo app
 {
   termHint: basketballTermHintPrefix + ADMPostfix,
@@ -171,7 +173,9 @@ Main.sns.hints = [
 }, {
   termHint: basketballTermHintPrefix + iOSPostfix,
   targetHint: basketballTargetHintPrefix
-}, {
+},
+// FOOTBALL
+{
   userAgent: footballUserAgentPrefix + iOSUserAgent,
   appHint: footballAppHintPrefix + iOSPostfix,
   termHint: footballTermHintPrefix + iOSPostfix,
@@ -186,7 +190,9 @@ Main.sns.hints = [
   appHint: footballAppHintPrefix + GCMPostfix,
   termHint: footballTermHintPrefix + GCMPostfix,
   targetHint: footballTargetHintPrefix
-}, {
+},
+// HOCKEY
+{
   userAgent: hockeyUserAgentPrefix + iOSUserAgent,
   appHint: hockeyAppHintPrefix + iOSPostfix,
   termHint: hockeyTermHintPrefix + iOSPostfix,
@@ -202,6 +208,7 @@ Main.sns.hints = [
   termHint: hockeyTermHintPrefix + GCMPostfix,
   targetHint: hockeyTargetHintPrefix
 },
+// SOCCER
 // this only exists in the Sports Combo app
 {
   termHint: soccerTermHintPrefix + ADMPostfix,
