@@ -8,7 +8,7 @@ import { expect } from "chai";
 // methods to test
 const {
   now,
-  minutesFromNow,
+  hoursFromNow,
 } = require("MAIN");
 
 
@@ -16,48 +16,48 @@ const {
 // =============================================================================
 
 /**
- * Test the minutesFromNow method - is a date, calls underlying methods.
+ * Test the hoursFromNow method - is a date, calls underlying methods.
  *
  */
 function ooo() {
-  // get the minutes from now
-  const minutes = minutesFromNow(15);
+  // get the hours from now
+  const hours = hoursFromNow(15);
   // expect to call now
   expect(now).to.be.called;
-  // getminutes
-  expect(Date.getMinutes).to.be.called;
-  // setminutes
-  expect(Date.setMinutes).to.be.called;
+  // getDate
+  expect(Date.getDate).to.be.called;
+  // setDate
+  expect(Date.setDate).to.be.called;
   // expect to be a date
-  expect(minutes).to.be.a("date");
+  expect(hours).to.be.a("date");
 }
 
 
 /**
- * Test the minutesFromNow method - no errors.
+ * Test the hoursFromNow method - no errors.
  *
  */
 function noErrors() {
   // expect to not throw an error
-  expect(minutesFromNow, 15).to.not.throw(Error);
+  expect(hoursFromNow, 15).to.not.throw(Error);
 }
 
 /**
- * Test the minutesFromNow method - missing arguments, no errors.
+ * Test the hoursFromNow method - missing arguments, no errors.
  *
  */
 function noErrorsMissing() {
   // expect to still not throw an error
-  expect(minutesFromNow).to.not.throw(Error);
+  expect(hoursFromNow).to.not.throw(Error);
 }
 
 /**
- * Test the minutesFromNow method - reversed, no errors.
+ * Test the hoursFromNow method - reversed, no errors.
  *
  */
 function noErrorsReversed() {
   // expect to still not throw an error
-  expect(minutesFromNow, 15, true).to.not.throw(Error);
+  expect(hoursFromNow, 15, true).to.not.throw(Error);
 }
 
 

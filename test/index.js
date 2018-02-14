@@ -8,7 +8,18 @@ import { info, error, debug } from "./logging";
 import { string, number } from "./prototypes";
 import { core, feed, notifications } from "./requests";
 import { auth, success, failure, robots } from "./responses";
-import { minutesFromNow, now, timerStart, timerStop } from "./timestamps";
+import {
+  now,
+  minutesFromNow,
+  hoursFromNow,
+  daysFromNow,
+  monthsFromNow,
+  endOfDay,
+  endOfWeek,
+  endOfMonth,
+  timerStart,
+  timerStop,
+} from "./timestamps";
 
 // errors
 // describe the error methods
@@ -28,8 +39,14 @@ describe("Logging", () => {
 // timestamps
 // describe the timestamp methods
 describe("Timestamps", () => {
-  describe("Mintes From Now", minutesFromNow);
   describe("Now", now);
+  describe("Mintes From Now", minutesFromNow);
+  describe("Hours from Now", hoursFromNow);
+  describe("Days From Now", daysFromNow);
+  describe("Months From Now", monthsFromNow);
+  describe("End of Day", endOfDay);
+  describe("End of Week", endOfWeek);
+  describe("End of Month", endOfMonth);
   describe("Timer Start", timerStart);
   describe("Timer Stop", timerStop);
 });

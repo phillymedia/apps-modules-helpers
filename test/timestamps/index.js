@@ -1,4 +1,10 @@
 export { default as minutesFromNow } from "./minutesFromNow.spec";
+export { default as hoursFromNow } from "./hoursFromNow.spec";
+export { default as daysFromNow } from "./daysFromNow.spec";
+export { default as monthsFromNow } from "./monthsFromNow.spec";
+export { default as endOfDay } from "./endOfDay.spec";
+export { default as endOfWeek } from "./endOfWeek.spec";
+export { default as endOfMonth } from "./endOfMonth.spec";
 export { default as now } from "./now.spec";
 export { default as timerStart } from "./timerStart.spec";
 export { default as timerStop } from "./timerStop.spec";
