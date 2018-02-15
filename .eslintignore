@@ -1,1 +1,3 @@
-dist/*.js
+dist/*
+coverage/*
+.nyc_output/*

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "philly-helpers",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A group of hopefully-reusable functions.",
   "repository": {
     "type": "git",

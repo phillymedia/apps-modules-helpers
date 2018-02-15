@@ -1,7 +1,8 @@
 .editorconfig
 .eslintignore
 .eslintrc.js
-.nyc_output
+.nyc_output/
+coverage/
 node_modules/
 npm-debug.log
 yarn-error.log
