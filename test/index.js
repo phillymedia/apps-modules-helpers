@@ -4,6 +4,7 @@
 // dependencies
 import transforms from "./transforms";
 import { makeError, formatError } from "./errors";
+import { until } from "./promises";
 import { info, error, debug } from "./logging";
 import { string, number } from "./prototypes";
 import { core, feed, notifications } from "./requests";
@@ -26,6 +27,12 @@ import {
 describe("Errors", () => {
   describe("Make Error", makeError);
   describe("Format Error", formatError);
+});
+
+// promises
+// describe the promise methods
+describe("Promises", () => {
+  describe("Until", until);
 });
 
 // logs
