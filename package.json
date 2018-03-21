@@ -5,7 +5,7 @@
   "description": "A group of hopefully-reusable functions.",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:phillymedia/apps-modules-helpers.git"
+    "url": "https://github.com/phillymedia/apps-modules-helpers.git"
   },
   "main": "./dist/app.js",
   "scripts": {
